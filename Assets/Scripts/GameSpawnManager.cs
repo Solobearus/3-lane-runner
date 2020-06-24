@@ -5,6 +5,10 @@ using UnityEngine;
 public class GameSpawnManager : MonoBehaviour
 {
 
+
+
+    [Range(0.6f, 10f)]
+    private float heightOfSpawn = 0.6f;
     [Range(10f, 100f)]
     private float distanceBetweenObstacles = 20f;
     [Range(5, 100)]
@@ -56,7 +60,7 @@ public class GameSpawnManager : MonoBehaviour
         }
         Destroy(currentPlayer);
 
-        gameStateManager.gameOver = false;
+        gameStateManager.playing = false;
         gameScoreManager.score = 0;
         Start();
     }
@@ -64,7 +68,7 @@ public class GameSpawnManager : MonoBehaviour
     void SpawnInitial()
     {
         SpawnNext();
-        currentPlayer = Instantiate(player, new Vector3(0, 1, 0), Quaternion.identity);
+        currentPlayer = Instantiate(player, new Vector3(0, heightOfSpawn, 1.8f), Quaternion.identity);
     }
 
     void SpawnNext()
@@ -72,16 +76,19 @@ public class GameSpawnManager : MonoBehaviour
         int i;
         for (i = bookmark; i < bookmark + numberOfObstaclesPerSpawn; i++)
         {
-            int xPosition = Random.Range(-1, 2);
+            List<GameObject> line = lineSpawnRandomizer();
 
-            var random = new Random();
-            var randomBool = Random.Range(0, 2) == 1;
-
-            ItemsOnRoadArray.Add(Instantiate(
-                randomBool ? obstacle : coin,
-                new Vector3(xPosition * 1.75f, 1, i * distanceBetweenObstacles),
-                Quaternion.identity
-            ));
+            for (int j = 0; j < line.Count; j++)
+            {
+                if (line[j] != null)
+                {
+                    ItemsOnRoadArray.Add(Instantiate(
+                        line[j],
+                        new Vector3((j - 1) * 1.75f, heightOfSpawn, i * distanceBetweenObstacles),
+                        Quaternion.identity
+                    ));
+                }
+            }
         }
 
         floorsArray.Add(Instantiate(floor, new Vector3(0, 0, i * distanceBetweenObstacles), Quaternion.identity));
@@ -96,5 +103,40 @@ public class GameSpawnManager : MonoBehaviour
             }
             ItemsOnRoadArray.RemoveRange(0, numberOfObstaclesPerSpawn);
         }
+    }
+
+    List<GameObject> lineSpawnRandomizer()
+    {
+        List<GameObject> itemsLine = new List<GameObject>();
+        int obstacleCount = 0;
+
+        do
+        {
+            itemsLine.Clear();
+            obstacleCount = 0;
+            for (int i = 0; i < 3; i++)
+            {
+                var random = new Random();
+                var randomItem = Random.Range(0, 3);
+                GameObject item = obstacle;
+
+                switch (randomItem)
+                {
+                    case 0:
+                        item = null;
+                        break;
+                    case 1:
+                        item = obstacle;
+                        obstacleCount++;
+                        break;
+                    case 2:
+                        item = coin;
+                        break;
+                }
+                itemsLine.Add(item);
+            }
+        } while (obstacleCount == 3);
+
+        return itemsLine;
     }
 }

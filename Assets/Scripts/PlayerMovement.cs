@@ -20,7 +20,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if (!gameStateManager.gameOver)
+        if (gameStateManager.playing)
         {
             float xAxisMovement = 0;
 
