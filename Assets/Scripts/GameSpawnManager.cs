@@ -23,7 +23,7 @@ public class GameSpawnManager : MonoBehaviour
     [SerializeReference]
     private GameObject floor;
 
-    private int bookmark;
+    private int bookmark = 5;
     private GameObject currentPlayer;
 
     List<GameObject> ItemsOnRoadArray = new List<GameObject>();
@@ -35,7 +35,6 @@ public class GameSpawnManager : MonoBehaviour
     {
         gameStateManager = GetComponent<GameStateManager>();
         gameScoreManager = GetComponent<GameScoreManager>();
-        bookmark = 1;
     }
     private void Update()
     {
@@ -64,6 +63,7 @@ public class GameSpawnManager : MonoBehaviour
 
         gameStateManager.playing = true;
         gameScoreManager.score = 0;
+        bookmark = 5;
         SpawnInitial();
     }
 

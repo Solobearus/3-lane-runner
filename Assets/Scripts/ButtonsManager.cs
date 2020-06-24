@@ -9,18 +9,17 @@ public class ButtonsManager : MonoBehaviour
 
     private GameSpawnManager _gameSpawnManager;
     private GameStateManager _gameStateManager;
+    [SerializeReference]
     private GameObject[] _startUI;
+    [SerializeReference]
     private GameObject[] _playingUI;
+    [SerializeReference]
     private GameObject[] _endUI;
 
     private void Start()
     {
         _gameSpawnManager = _gameManager.GetComponent<GameSpawnManager>();
         _gameStateManager = _gameManager.GetComponent<GameStateManager>();
-        _startUI = GameObject.FindGameObjectsWithTag("StartUI");
-        _playingUI = GameObject.FindGameObjectsWithTag("PlayingUI");
-        _endUI = GameObject.FindGameObjectsWithTag("EndUI");
-
         disablePlayingUI();
     }
 
@@ -33,8 +32,8 @@ public class ButtonsManager : MonoBehaviour
     public void StartGame()
     {
         _gameSpawnManager.Restart();
-        disableStartUI();
         enablePlayingUI();
+        disableStartUI();
     }
 
     void disableStartUI() { foreach (var item in _startUI) { item.SetActive(false); } }
