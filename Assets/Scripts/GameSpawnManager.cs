@@ -23,14 +23,20 @@ public class GameSpawnManager : MonoBehaviour
     private GameObject currentPlayer;
 
     List<GameObject> ItemsOnRoadArray = new List<GameObject>();
+    List<GameObject> floorsArray = new List<GameObject>();
+    private GameStateManager gameStateManager;
+    private GameScoreManager gameScoreManager;
+
     void Start()
     {
+        gameStateManager = GetComponent<GameStateManager>();
+        gameScoreManager = GetComponent<GameScoreManager>();
         bookmark = 1;
         SpawnInitial();
     }
     private void Update()
     {
-        var positionForSpawn = (bookmark - (numberOfObstaclesPerSpawn / 2)) * distanceBetweenObstacles;
+        var positionForSpawn = (bookmark - numberOfObstaclesPerSpawn) * distanceBetweenObstacles;
 
         if (currentPlayer.transform.position.z > positionForSpawn)
         {
@@ -38,15 +44,21 @@ public class GameSpawnManager : MonoBehaviour
         }
     }
 
-    void Restart()
+    public void Restart()
     {
         foreach (var item in ItemsOnRoadArray)
         {
             Destroy(item);
         }
-        Destroy(player);
+        foreach (var item in floorsArray)
+        {
+            Destroy(item);
+        }
+        Destroy(currentPlayer);
 
-        SpawnInitial();
+        gameStateManager.gameOver = false;
+        gameScoreManager.score = 0;
+        Start();
     }
 
     void SpawnInitial()
@@ -60,7 +72,7 @@ public class GameSpawnManager : MonoBehaviour
         int i;
         for (i = bookmark; i < bookmark + numberOfObstaclesPerSpawn; i++)
         {
-            int xPosition = Random.Range(-1, 1);
+            int xPosition = Random.Range(-1, 2);
 
             var random = new Random();
             var randomBool = Random.Range(0, 2) == 1;
@@ -72,7 +84,7 @@ public class GameSpawnManager : MonoBehaviour
             ));
         }
 
-        Instantiate(floor, new Vector3(0, 0, i * distanceBetweenObstacles), Quaternion.identity);
+        floorsArray.Add(Instantiate(floor, new Vector3(0, 0, i * distanceBetweenObstacles), Quaternion.identity));
 
         bookmark = i;
 

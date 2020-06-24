@@ -2,11 +2,15 @@ using UnityEngine;
 
 public class CameraManager : MonoBehaviour
 {
-
-    [Range(1f, 10f)] private float cameraDistanceZ = 3.0F;
-    [Range(1f, 10f)] private float cameraDistanceY = 1.0F;
+    [SerializeReference]
+    [Range(1f, 10f)] 
+    private float cameraDistanceZ = 3.0F;
+    [SerializeReference]
+    [Range(1f, 10f)] 
+    private float cameraDistanceY = 1.0F;
 
     private GameObject _player;
+
 
     public GameObject Player
     {

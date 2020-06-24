@@ -7,11 +7,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeReference]
     [Range(1f, 100f)] private float speed = 10F;
     private Vector2 startTouchPosition, endTouchPosition;
-    
+
     [SerializeReference]
     private GameObject gameManager;
     private GameStateManager gameStateManager;
-    
+
     private void Start()
     {
         GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraManager>().Player = gameObject;
