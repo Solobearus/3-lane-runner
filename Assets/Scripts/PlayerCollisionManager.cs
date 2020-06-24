@@ -17,7 +17,7 @@ public class PlayerCollisionManager : MonoBehaviour
     {
         if (other.gameObject.tag == "Obstacle")
         {
-            gameStateManager.playing = true;
+            gameStateManager.playing = false;
         }
     }
 

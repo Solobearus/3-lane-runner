@@ -36,15 +36,17 @@ public class GameSpawnManager : MonoBehaviour
         gameStateManager = GetComponent<GameStateManager>();
         gameScoreManager = GetComponent<GameScoreManager>();
         bookmark = 1;
-        SpawnInitial();
     }
     private void Update()
     {
-        var positionForSpawn = (bookmark - numberOfObstaclesPerSpawn) * distanceBetweenObstacles;
-
-        if (currentPlayer.transform.position.z > positionForSpawn)
+        if (gameStateManager.playing)
         {
-            SpawnNext();
+            var positionForSpawn = (bookmark - numberOfObstaclesPerSpawn) * distanceBetweenObstacles - distanceBetweenObstacles;
+
+            if (currentPlayer.transform.position.z > positionForSpawn)
+            {
+                SpawnNextBulk();
+            }
         }
     }
 
@@ -60,18 +62,18 @@ public class GameSpawnManager : MonoBehaviour
         }
         Destroy(currentPlayer);
 
-        gameStateManager.playing = false;
+        gameStateManager.playing = true;
         gameScoreManager.score = 0;
-        Start();
+        SpawnInitial();
     }
 
     void SpawnInitial()
     {
-        SpawnNext();
         currentPlayer = Instantiate(player, new Vector3(0, heightOfSpawn, 1.8f), Quaternion.identity);
+        SpawnNextBulk();
     }
 
-    void SpawnNext()
+    void SpawnNextBulk()
     {
         int i;
         for (i = bookmark; i < bookmark + numberOfObstaclesPerSpawn; i++)

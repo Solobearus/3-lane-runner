@@ -18,7 +18,6 @@ public class GameScoreManager : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log("Score : " + _score);
         scoreUI.text = "Score : " + _score;
     }
 }

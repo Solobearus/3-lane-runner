@@ -7,6 +7,9 @@ TagManager:
   - Obstacle
   - GameManager
   - Coin
+  - StartUI
+  - PlayingUI
+  - EndUI
   layers:
   - Default
   - TransparentFX
