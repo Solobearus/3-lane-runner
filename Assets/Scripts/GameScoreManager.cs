@@ -6,18 +6,26 @@ using UnityEngine.UI;
 public class GameScoreManager : MonoBehaviour
 {
 
-    [SerializeReference]
-    private Text scoreUI;
     private int _score = 0;
     public int score
     {
         get { return _score; }
-        set { _score = value; }
+        set
+        {
+            if (value > _highScore)
+            {
+                _highScore = value;
+            }
+            _score = value;
+        }
     }
 
-
-    private void Update()
+    private int _highScore;
+    public int highScore
     {
-        scoreUI.text = "Score : " + _score;
+        get { return _highScore; }
+        set { _highScore = value; }
     }
+
+
 }

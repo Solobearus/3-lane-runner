@@ -23,7 +23,8 @@ public class GameSpawnManager : MonoBehaviour
     [SerializeReference]
     private GameObject floor;
 
-    private int bookmark = 5;
+    private int BOOKMARK_START = 1;
+    private int bookmark = 0;
     private GameObject currentPlayer;
 
     List<GameObject> ItemsOnRoadArray = new List<GameObject>();
@@ -33,6 +34,7 @@ public class GameSpawnManager : MonoBehaviour
 
     void Start()
     {
+        bookmark = BOOKMARK_START;
         gameStateManager = GetComponent<GameStateManager>();
         gameScoreManager = GetComponent<GameScoreManager>();
     }
@@ -40,10 +42,12 @@ public class GameSpawnManager : MonoBehaviour
     {
         if (gameStateManager.playing)
         {
-            var positionForSpawn = (bookmark - numberOfObstaclesPerSpawn) * distanceBetweenObstacles - distanceBetweenObstacles;
+            var positionForSpawn = (bookmark - numberOfObstaclesPerSpawn) * distanceBetweenObstacles;
 
-            if (currentPlayer.transform.position.z > positionForSpawn)
+            if (currentPlayer.transform.position.z > positionForSpawn && positionForSpawn> numberOfObstaclesPerSpawn)
             {
+                Debug.Log("wtf");
+                Debug.Log(bookmark);
                 SpawnNextBulk();
             }
         }
@@ -63,7 +67,7 @@ public class GameSpawnManager : MonoBehaviour
 
         gameStateManager.playing = true;
         gameScoreManager.score = 0;
-        bookmark = 5;
+        bookmark = BOOKMARK_START;
         SpawnInitial();
     }
 
@@ -97,7 +101,7 @@ public class GameSpawnManager : MonoBehaviour
 
         bookmark = i;
 
-        if (ItemsOnRoadArray.Count > numberOfObstaclesPerSpawn * 2)
+        if (ItemsOnRoadArray.Count > numberOfObstaclesPerSpawn * 6)
         {
             for (i = 0; i < numberOfObstaclesPerSpawn; i++)
             {

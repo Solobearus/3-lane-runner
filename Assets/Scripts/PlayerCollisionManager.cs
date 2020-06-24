@@ -18,6 +18,7 @@ public class PlayerCollisionManager : MonoBehaviour
         if (other.gameObject.tag == "Obstacle")
         {
             gameStateManager.playing = false;
+            gameStateManager.gameOver = true;
         }
     }
 
