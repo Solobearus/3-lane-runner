@@ -11,6 +11,7 @@ TagManager:
   - PlayingUI
   - EndUI
   - lowerSpeedPowerUp
+  - BiggerCoin
   layers:
   - Default
   - TransparentFX

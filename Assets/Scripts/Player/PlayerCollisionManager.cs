@@ -9,7 +9,8 @@ public class PlayerCollisionManager : MonoBehaviour
     private GameScoreManager gameScoreManager;
 
     int SCORE_FROM_COIN = 1;
-    int LOWER_SPEED_FROM_POWER_UP = 1;
+    int SCORE_FROM_BIGGER_COIN = 10;
+    int LOWER_SPEED_FROM_POWER_UP = 4;
     private void Start()
     {
         gameManger = GameObject.Find("GameManager");
@@ -30,6 +31,10 @@ public class PlayerCollisionManager : MonoBehaviour
         if (other.gameObject.tag == "Coin")
         {
             gameScoreManager.score += SCORE_FROM_COIN;
+        }
+        if (other.gameObject.tag == "BiggerCoin")
+        {
+            gameScoreManager.score += SCORE_FROM_BIGGER_COIN;
         }
         if (other.gameObject.tag == "lowerSpeedPowerUp")
         {

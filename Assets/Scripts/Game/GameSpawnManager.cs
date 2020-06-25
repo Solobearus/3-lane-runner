@@ -11,6 +11,8 @@ public class GameSpawnManager : MonoBehaviour
     [SerializeReference]
     private GameObject coin;
     [SerializeReference]
+    private GameObject biggerCoin;
+    [SerializeReference]
     private GameObject lowerSpeedPowerUp;
     [SerializeReference]
     private GameObject floor;
@@ -83,7 +85,7 @@ public class GameSpawnManager : MonoBehaviour
                 {
                     ItemsOnRoadArray.Add(Instantiate(
                         line[j],
-                        new Vector3((j - 1) * 1.75f, gameStateManager.heightOfSpawn, i * gameStateManager.distanceBetweenObstacles),
+                        new Vector3((j - 1) * 1.75f, heightOfSpawnCalculator(line[j]), i * gameStateManager.distanceBetweenObstacles),
                         Quaternion.identity
                     ));
                 }
@@ -110,7 +112,7 @@ public class GameSpawnManager : MonoBehaviour
     List<GameObject> lineSpawnRandomizer()
     {
         List<GameObject> itemsLine = new List<GameObject>();
-        GameObject[] itemsAvaliable = { obstacle, coin, null, lowerSpeedPowerUp };
+        GameObject[] itemsAvaliable = { obstacle, null, coin, biggerCoin, lowerSpeedPowerUp };
 
         int[] randomLine = Randomizer.lineRandomizer();
 
@@ -121,5 +123,21 @@ public class GameSpawnManager : MonoBehaviour
         }
 
         return itemsLine;
+    }
+
+    float heightOfSpawnCalculator(GameObject item)
+    {
+
+        float result = gameStateManager.heightOfSpawn;
+
+        if (item == coin)
+        {
+            result = gameStateManager.heightOfSpawn * 1.1f;
+        }
+        if (item == biggerCoin)
+        {
+            result = gameStateManager.heightOfSpawn * 1.4f;
+        }
+        return result;
     }
 }

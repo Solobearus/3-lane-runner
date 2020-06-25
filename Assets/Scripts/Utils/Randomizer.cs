@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 static public class Randomizer
 {
-    static int[] probabilities = { 50, 25, 24, 1 };
+    static int[] probabilities = { 40, 35, 21, 2, 2 };
     static public int[] lineRandomizer()
     {
         int[] randomizedLine = new int[3];
@@ -26,11 +26,11 @@ static public class Randomizer
                 {
                     item = 1;
                 }
-                else if (randomItem <= probabilities[0] + probabilities[1] + probabilities[2])
+                else if (randomItem < probabilities[0] + probabilities[1] + probabilities[2])
                 {
                     item = 2;
                 }
-                else if (randomItem <= probabilities[0] + probabilities[1] + probabilities[2] + probabilities[3])
+                else 
                 {
                     item = 3;
                 }

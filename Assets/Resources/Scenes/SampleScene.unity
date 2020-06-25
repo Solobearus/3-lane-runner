@@ -918,7 +918,6 @@ MonoBehaviour:
   _distanceBetweenObstacles: 20
   _itemsPerSpawn: 10
   _speedScoreMultiplier: 0.5
-  _speedSubtractionFromPowerUp: 0
 --- !u!114 &228227881
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -934,6 +933,8 @@ MonoBehaviour:
   player: {fileID: 1396157437977308860, guid: 085081336f04c8d4c97daf244376936b, type: 3}
   obstacle: {fileID: 669244358005917809, guid: 0a9d1cb9a0a7df448a247f6e9566fde8, type: 3}
   coin: {fileID: 7561730800727377845, guid: e647c34e496c1ae4d91fff943f937fcc, type: 3}
+  biggerCoin: {fileID: 2398202326602261218, guid: 918d9e9f145eadf43853f448e128d991,
+    type: 3}
   lowerSpeedPowerUp: {fileID: 4378050556821946524, guid: 9e09f6625d9dc014c98bdb5fe0069c8a,
     type: 3}
   floor: {fileID: 5256862102109184565, guid: 9869d99532e5cd14293460cb62892308, type: 3}
