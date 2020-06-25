@@ -36,14 +36,14 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\CameraManager.cs" />
-     <Compile Include="Assets\Scripts\Collectable.cs" />
-     <Compile Include="Assets\Scripts\GameScoreManager.cs" />
-     <Compile Include="Assets\Scripts\GameSpawnManager.cs" />
-     <Compile Include="Assets\Scripts\GameStateManager.cs" />
-     <Compile Include="Assets\Scripts\PlayerCollisionManager.cs" />
-     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
-     <Compile Include="Assets\Scripts\UIManager.cs" />
+     <Compile Include="Assets\Scripts\Camera\CameraManager.cs" />
+     <Compile Include="Assets\Scripts\Collectable\Collectable.cs" />
+     <Compile Include="Assets\Scripts\Game\GameScoreManager.cs" />
+     <Compile Include="Assets\Scripts\Game\GameSpawnManager.cs" />
+     <Compile Include="Assets\Scripts\Game\GameStateManager.cs" />
+     <Compile Include="Assets\Scripts\Player\PlayerCollisionManager.cs" />
+     <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
+     <Compile Include="Assets\Scripts\UI\UIManager.cs" />
     <Reference Include="UnityEngine">
         <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.1f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
