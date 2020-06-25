@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 static public class Randomizer
 {
-    static int[] probabilities = { 40, 35, 21, 2, 2 };
+    static int[] probabilities = { 40, 21, 2, 2 };
     static public int[] lineRandomizer()
     {
         int[] randomizedLine = new int[3];
@@ -30,7 +30,7 @@ static public class Randomizer
                 {
                     item = 2;
                 }
-                else 
+                else
                 {
                     item = 3;
                 }

@@ -112,7 +112,7 @@ public class GameSpawnManager : MonoBehaviour
     List<GameObject> lineSpawnRandomizer()
     {
         List<GameObject> itemsLine = new List<GameObject>();
-        GameObject[] itemsAvaliable = { obstacle, null, coin, biggerCoin, lowerSpeedPowerUp };
+        GameObject[] itemsAvaliable = { obstacle, coin, biggerCoin, lowerSpeedPowerUp, null, };
 
         int[] randomLine = Randomizer.lineRandomizer();
 
