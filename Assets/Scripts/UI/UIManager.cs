@@ -33,7 +33,7 @@ public class UIManager : MonoBehaviour
     [SerializeReference]
     private Slider _cameraXRotationSlider;
     [SerializeReference]
-    private Slider _playerSpeedSlider;
+    private Slider _playerInitialSpeedSlider;
     [SerializeReference]
     private Slider _itemsPerSpawnSlider;
     [SerializeReference]
@@ -118,7 +118,7 @@ public class UIManager : MonoBehaviour
         _cameraDistanceZSlider.value = _cameraManager.cameraDistanceZ;
         _cameraDistanceYSlider.value = _cameraManager.cameraDistanceY;
         _cameraXRotationSlider.value = _cameraManager.cameraRotationX;
-        _playerSpeedSlider.value = _gameStateManager.playerSpeed;
+        _playerInitialSpeedSlider.value = _gameStateManager.playerInitialSpeed;
         _itemsPerSpawnSlider.value = _gameStateManager.itemsPerSpawn;
         _distanceBetweenObstaclesSlider.value = _gameStateManager.distanceBetweenObstacles;
     }
@@ -134,9 +134,9 @@ public class UIManager : MonoBehaviour
     {
         _cameraManager.cameraRotationX = slider.value;
     }
-    public void OnPlayerSpeedSliderChange(Slider slider)
+    public void OnplayerInitialSpeedSliderChange(Slider slider)
     {
-        _gameStateManager.playerSpeed = slider.value;
+        _gameStateManager.playerInitialSpeed = slider.value;
     }
     public void OnItemsPerSpawnSliderChange(Slider slider)
     {

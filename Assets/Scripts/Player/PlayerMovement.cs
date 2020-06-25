@@ -8,10 +8,12 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 startTouchPosition, endTouchPosition;
 
     private GameStateManager gameStateManager;
+    private GameScoreManager gameScoreManager;
 
     private void Start()
     {
         gameStateManager = GameObject.Find("GameManager").GetComponent<GameStateManager>();
+        gameScoreManager = GameObject.Find("GameManager").GetComponent<GameScoreManager>();
     }
 
     private void Update()
@@ -20,9 +22,25 @@ public class PlayerMovement : MonoBehaviour
         {
             float xAxisMovement = CheckMovement();
 
-            Vector3 newPlayerPosition = new Vector3(transform.position.x + xAxisMovement, transform.position.y, transform.position.z + gameStateManager.playerSpeed * Time.deltaTime);
+
+            Vector3 newPlayerPosition = new Vector3(transform.position.x + xAxisMovement, transform.position.y, transform.position.z + calculateSpeedRelativeToScore() * Time.deltaTime);
             transform.position = newPlayerPosition;
         }
+    }
+
+    float calculateSpeedRelativeToScore()
+    {
+        float calculatedSpeed = gameStateManager.playerInitialSpeed;
+
+        calculatedSpeed += gameScoreManager.score * gameStateManager.speedScoreMultiplier;
+
+        calculatedSpeed -= gameStateManager.speedSubtractionFromPowerUp;
+
+        if(calculatedSpeed < gameStateManager.playerInitialSpeed){
+            calculatedSpeed = gameStateManager.playerInitialSpeed;
+        }
+
+        return calculatedSpeed;
     }
 
     float CheckMovement()
@@ -51,7 +69,6 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.D) && transform.position.x < 1.5f)
             xAxisMovement = 1.75f;
 
-        Debug.Log(xAxisMovement);
         return xAxisMovement;
     }
 }

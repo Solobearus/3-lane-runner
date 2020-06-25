@@ -10,6 +10,7 @@ TagManager:
   - StartUI
   - PlayingUI
   - EndUI
+  - lowerSpeedPowerUp
   layers:
   - Default
   - TransparentFX

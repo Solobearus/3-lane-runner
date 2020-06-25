@@ -914,9 +914,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96172132306641741b1abf37b16eaa6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerSpeed: 10
+  _playerInitialSpeed: 15
   _distanceBetweenObstacles: 20
   _itemsPerSpawn: 10
+  _speedScoreMultiplier: 0.5
+  _speedSubtractionFromPowerUp: 0
 --- !u!114 &228227881
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -932,6 +934,8 @@ MonoBehaviour:
   player: {fileID: 1396157437977308860, guid: 085081336f04c8d4c97daf244376936b, type: 3}
   obstacle: {fileID: 669244358005917809, guid: 0a9d1cb9a0a7df448a247f6e9566fde8, type: 3}
   coin: {fileID: 7561730800727377845, guid: e647c34e496c1ae4d91fff943f937fcc, type: 3}
+  lowerSpeedPowerUp: {fileID: 4378050556821946524, guid: 9e09f6625d9dc014c98bdb5fe0069c8a,
+    type: 3}
   floor: {fileID: 5256862102109184565, guid: 9869d99532e5cd14293460cb62892308, type: 3}
 --- !u!114 &228227882
 MonoBehaviour:
@@ -967,9 +971,9 @@ MonoBehaviour:
   _cameraDistanceZSlider: {fileID: 592252085}
   _cameraDistanceYSlider: {fileID: 1523372781}
   _cameraXRotationSlider: {fileID: 224935637}
-  _playerSpeedSlider: {fileID: 1565412020}
-  _itemsPerSpawnSlider: {fileID: 0}
-  _distanceBetweenObstaclesSlider: {fileID: 0}
+  _playerInitialSpeedSlider: {fileID: 0}
+  _itemsPerSpawnSlider: {fileID: 251766239}
+  _distanceBetweenObstaclesSlider: {fileID: 333800875}
 --- !u!1 &241596748
 GameObject:
   m_ObjectHideFlags: 0
@@ -1489,15 +1493,15 @@ MonoBehaviour:
   m_FillRect: {fileID: 1757305886}
   m_HandleRect: {fileID: 0}
   m_Direction: 0
-  m_MinValue: -50
-  m_MaxValue: 50
+  m_MinValue: 1
+  m_MaxValue: 100
   m_WholeNumbers: 0
   m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: OnCameraXRotationSliderChange
+      - m_Target: {fileID: 228227884}
+        m_MethodName: OnDistanceBetweenObstaclesSliderChange
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 333800875}
@@ -2431,7 +2435,7 @@ GameObject:
   - component: {fileID: 613402246}
   - component: {fileID: 613402247}
   m_Layer: 0
-  m_Name: CameraXRotationRow
+  m_Name: distanceBetweenObstaclesRow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3366,10 +3370,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 42
+    m_FontSize: 28
     m_FontStyle: 1
     m_BestFit: 0
-    m_MinSize: 4
+    m_MinSize: 1
     m_MaxSize: 48
     m_Alignment: 3
     m_AlignByGeometry: 0
@@ -3377,9 +3381,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'CameraXRotation:
-
-'
+  m_Text: 'Distance Between Obstacles :'
 --- !u!222 &872821925
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5127,7 +5129,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'CameraYPosition :
+  m_Text: 'Items Per Spawn :
 
 '
 --- !u!222 &1408766687

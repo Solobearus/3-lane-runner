@@ -11,6 +11,8 @@ public class GameSpawnManager : MonoBehaviour
     [SerializeReference]
     private GameObject coin;
     [SerializeReference]
+    private GameObject lowerSpeedPowerUp;
+    [SerializeReference]
     private GameObject floor;
 
     private int BOOKMARK_START = 1;
@@ -108,7 +110,7 @@ public class GameSpawnManager : MonoBehaviour
     List<GameObject> lineSpawnRandomizer()
     {
         List<GameObject> itemsLine = new List<GameObject>();
-        GameObject[] itemsAvaliable = { obstacle, coin, null };
+        GameObject[] itemsAvaliable = { obstacle, coin, null, lowerSpeedPowerUp };
 
         int[] randomLine = Randomizer.lineRandomizer();
 
