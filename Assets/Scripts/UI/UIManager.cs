@@ -34,6 +34,10 @@ public class UIManager : MonoBehaviour
     private Slider _cameraXRotationSlider;
     [SerializeReference]
     private Slider _playerSpeedSlider;
+    [SerializeReference]
+    private Slider _itemsPerSpawnSlider;
+    [SerializeReference]
+    private Slider _distanceBetweenObstaclesSlider;
 
     private void Start()
     {
@@ -115,6 +119,8 @@ public class UIManager : MonoBehaviour
         _cameraDistanceYSlider.value = _cameraManager.cameraDistanceY;
         _cameraXRotationSlider.value = _cameraManager.cameraRotationX;
         _playerSpeedSlider.value = _gameStateManager.playerSpeed;
+        _itemsPerSpawnSlider.value = _gameStateManager.itemsPerSpawn;
+        _distanceBetweenObstaclesSlider.value = _gameStateManager.distanceBetweenObstacles;
     }
     public void OnCameraZSliderChange(Slider slider)
     {
@@ -132,8 +138,14 @@ public class UIManager : MonoBehaviour
     {
         _gameStateManager.playerSpeed = slider.value;
     }
-
-
+    public void OnItemsPerSpawnSliderChange(Slider slider)
+    {
+        _gameStateManager.itemsPerSpawn = (int)slider.value;
+    }
+    public void OnDistanceBetweenObstaclesSliderChange(Slider slider)
+    {
+        _gameStateManager.distanceBetweenObstacles = slider.value;
+    }
     public void Preset1Button() { changeValuesToPreset(4f, 1f, 0f); }
     public void Preset2Button() { changeValuesToPreset(-11f, 25f, 90f); }
     public void Preset3Button() { changeValuesToPreset(-0.5f, 0.5f, 0f); }

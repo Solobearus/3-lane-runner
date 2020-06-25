@@ -4,18 +4,6 @@ using UnityEngine;
 
 public class GameSpawnManager : MonoBehaviour
 {
-
-
-
-    [Range(0.6f, 10f)]
-    private float heightOfSpawn = 0.6f;
-    [SerializeReference]
-    [Range(10f, 100f)]
-    private float distanceBetweenObstacles = 20f;
-    [SerializeReference]
-    [Range(5, 100)]
-    private int numberOfObstaclesPerSpawn = 10;
-
     [SerializeReference]
     private GameObject player;
     [SerializeReference]
@@ -46,12 +34,10 @@ public class GameSpawnManager : MonoBehaviour
     {
         if (gameStateManager.playing)
         {
-            var positionForSpawn = (bookmark - numberOfObstaclesPerSpawn) * distanceBetweenObstacles;
+            var positionForSpawn = (bookmark - gameStateManager.itemsPerSpawn) * gameStateManager.distanceBetweenObstacles;
 
-            if (currentPlayer.transform.position.z > positionForSpawn && positionForSpawn > numberOfObstaclesPerSpawn)
+            if (currentPlayer.transform.position.z > positionForSpawn && positionForSpawn > gameStateManager.itemsPerSpawn)
             {
-                Debug.Log("wtf");
-                Debug.Log(bookmark);
                 SpawnNextBulk();
             }
         }
@@ -77,7 +63,7 @@ public class GameSpawnManager : MonoBehaviour
 
     void SpawnInitial()
     {
-        currentPlayer = Instantiate(player, new Vector3(0, heightOfSpawn, 1.8f), Quaternion.identity);
+        currentPlayer = Instantiate(player, new Vector3(0, gameStateManager.heightOfSpawn, 1.8f), Quaternion.identity);
         cameraManager.Player = currentPlayer;
         SpawnNextBulk();
     }
@@ -85,7 +71,7 @@ public class GameSpawnManager : MonoBehaviour
     void SpawnNextBulk()
     {
         int i;
-        for (i = bookmark; i < bookmark + numberOfObstaclesPerSpawn; i++)
+        for (i = bookmark; i < bookmark + gameStateManager.itemsPerSpawn; i++)
         {
             List<GameObject> line = lineSpawnRandomizer();
 
@@ -95,27 +81,27 @@ public class GameSpawnManager : MonoBehaviour
                 {
                     ItemsOnRoadArray.Add(Instantiate(
                         line[j],
-                        new Vector3((j - 1) * 1.75f, heightOfSpawn, i * distanceBetweenObstacles),
+                        new Vector3((j - 1) * 1.75f, gameStateManager.heightOfSpawn, i * gameStateManager.distanceBetweenObstacles),
                         Quaternion.identity
                     ));
                 }
             }
         }
 
-        GameObject newFloor = Instantiate(floor, new Vector3(0, 0, i * distanceBetweenObstacles), Quaternion.identity);
-        newFloor.transform.localScale = new Vector3(newFloor.transform.localScale.x, newFloor.transform.localScale.y, distanceBetweenObstacles * numberOfObstaclesPerSpawn);
+        GameObject newFloor = Instantiate(floor, new Vector3(0, 0, i * gameStateManager.distanceBetweenObstacles), Quaternion.identity);
+        newFloor.transform.localScale = new Vector3(newFloor.transform.localScale.x, newFloor.transform.localScale.y, gameStateManager.distanceBetweenObstacles * gameStateManager.itemsPerSpawn);
         floorsArray.Add(newFloor);
 
 
         bookmark = i;
 
-        if (ItemsOnRoadArray.Count > numberOfObstaclesPerSpawn * 6)
+        if (ItemsOnRoadArray.Count > gameStateManager.itemsPerSpawn * 6)
         {
-            for (i = 0; i < numberOfObstaclesPerSpawn; i++)
+            for (i = 0; i < gameStateManager.itemsPerSpawn; i++)
             {
                 Destroy(ItemsOnRoadArray[i]);
             }
-            ItemsOnRoadArray.RemoveRange(0, numberOfObstaclesPerSpawn);
+            ItemsOnRoadArray.RemoveRange(0, gameStateManager.itemsPerSpawn);
         }
     }
 
