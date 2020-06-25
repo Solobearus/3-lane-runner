@@ -108,34 +108,15 @@ public class GameSpawnManager : MonoBehaviour
     List<GameObject> lineSpawnRandomizer()
     {
         List<GameObject> itemsLine = new List<GameObject>();
-        int obstacleCount = 0;
+        GameObject[] itemsAvaliable = { obstacle, coin, null };
 
-        do
+        int[] randomLine = Randomizer.lineRandomizer();
+
+        for (int i = 0; i < randomLine.Length; i++)
         {
-            itemsLine.Clear();
-            obstacleCount = 0;
-            for (int i = 0; i < 3; i++)
-            {
-                var random = new Random();
-                var randomItem = Random.Range(0, 3);
-                GameObject item = obstacle;
-
-                switch (randomItem)
-                {
-                    case 0:
-                        item = null;
-                        break;
-                    case 1:
-                        item = obstacle;
-                        obstacleCount++;
-                        break;
-                    case 2:
-                        item = coin;
-                        break;
-                }
-                itemsLine.Add(item);
-            }
-        } while (obstacleCount == 3);
+            Debug.Log(randomLine[i]);
+            itemsLine.Add(itemsAvaliable[randomLine[i]]);
+        }
 
         return itemsLine;
     }
