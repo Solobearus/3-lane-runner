@@ -32,7 +32,8 @@ public class UIManager : MonoBehaviour
     private Slider _cameraDistanceYSlider;
     [SerializeReference]
     private Slider _cameraXRotationSlider;
-
+    [SerializeReference]
+    private Slider _playerSpeedSlider;
 
     private void Start()
     {
@@ -113,6 +114,7 @@ public class UIManager : MonoBehaviour
         _cameraDistanceZSlider.value = _cameraManager.cameraDistanceZ;
         _cameraDistanceYSlider.value = _cameraManager.cameraDistanceY;
         _cameraXRotationSlider.value = _cameraManager.cameraRotationX;
+        _playerSpeedSlider.value = _gameStateManager.playerSpeed;
     }
     public void OnCameraZSliderChange(Slider slider)
     {
@@ -126,11 +128,16 @@ public class UIManager : MonoBehaviour
     {
         _cameraManager.cameraRotationX = slider.value;
     }
+    public void OnPlayerSpeedSliderChange(Slider slider)
+    {
+        _gameStateManager.playerSpeed = slider.value;
+    }
 
-    public void Preset1Button(){changeValuesToPreset(6f,1f,0f);}
-    public void Preset2Button(){changeValuesToPreset(-25f,50f,90f);}
-    public void Preset3Button(){changeValuesToPreset(-0.5f,0.5f,0f);}
-    public void Preset4Button(){changeValuesToPreset(10f,10f,20f);}
+
+    public void Preset1Button() { changeValuesToPreset(4f, 1f, 0f); }
+    public void Preset2Button() { changeValuesToPreset(-11f, 25f, 90f); }
+    public void Preset3Button() { changeValuesToPreset(-0.5f, 0.5f, 0f); }
+    public void Preset4Button() { changeValuesToPreset(10f, 10f, 20f); }
 
     public void changeValuesToPreset(float z, float y, float x)
     {

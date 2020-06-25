@@ -9,8 +9,10 @@ public class GameSpawnManager : MonoBehaviour
 
     [Range(0.6f, 10f)]
     private float heightOfSpawn = 0.6f;
+    [SerializeReference]
     [Range(10f, 100f)]
     private float distanceBetweenObstacles = 20f;
+    [SerializeReference]
     [Range(5, 100)]
     private int numberOfObstaclesPerSpawn = 10;
 
@@ -46,7 +48,7 @@ public class GameSpawnManager : MonoBehaviour
         {
             var positionForSpawn = (bookmark - numberOfObstaclesPerSpawn) * distanceBetweenObstacles;
 
-            if (currentPlayer.transform.position.z > positionForSpawn && positionForSpawn> numberOfObstaclesPerSpawn)
+            if (currentPlayer.transform.position.z > positionForSpawn && positionForSpawn > numberOfObstaclesPerSpawn)
             {
                 Debug.Log("wtf");
                 Debug.Log(bookmark);
@@ -100,7 +102,10 @@ public class GameSpawnManager : MonoBehaviour
             }
         }
 
-        floorsArray.Add(Instantiate(floor, new Vector3(0, 0, i * distanceBetweenObstacles), Quaternion.identity));
+        GameObject newFloor = Instantiate(floor, new Vector3(0, 0, i * distanceBetweenObstacles), Quaternion.identity);
+        newFloor.transform.localScale = new Vector3(newFloor.transform.localScale.x, newFloor.transform.localScale.y, distanceBetweenObstacles * numberOfObstaclesPerSpawn);
+        floorsArray.Add(newFloor);
+
 
         bookmark = i;
 
