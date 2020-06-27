@@ -5,11 +5,9 @@ public class GameConfigManager : MonoBehaviour
     [SerializeReference]
     [Range(1f, 100f)]
     private float _playerInitialSpeed = 10F;
-
     [SerializeReference]
     [Range(0.6f, 10f)]
     private float _heightOfSpawn = 0.6f;
-    
     [SerializeReference]
     [Range(10f, 100f)]
     private float _distanceBetweenObstacles = 20f;
@@ -19,7 +17,6 @@ public class GameConfigManager : MonoBehaviour
     [SerializeReference]
     [Range(0.1f, 2f)]
     private float _speedScoreMultiplier = 0.5f;
-
     [SerializeReference]
     [Range(0.1f, 2f)]
     private int _speedSubtractionFromPowerUp = 0;

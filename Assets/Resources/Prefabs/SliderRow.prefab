@@ -76,8 +76,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2d62369d5ebbfd45a97fba7f7cfa5cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: 
-  RowTitle: {fileID: 8479672728216808626}
+  gameManager: {fileID: 8009884184621082775, guid: 7f672873d0b9de7479258d2820f3727d,
+    type: 3}
+  affectedVariable: 
+  rowTitle: {fileID: 8479672728216808624}
+  slider: {fileID: 8479672729052219071}
 --- !u!1 &8479672727681718796
 GameObject:
   m_ObjectHideFlags: 0

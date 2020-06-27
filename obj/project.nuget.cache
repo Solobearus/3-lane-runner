@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "zSIy6nGAYUTdyGvR2455I4A3Hbugc6cHOpzyQIUmq7IkvPASi9InHmuHm/HH5N61HK8IWLwAJDDfpqI5RBa39w==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\ivans\\Crazy Labs Prototype\\Assembly-CSharp.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\ivans\\.nuget\\packages\\case\\1.6.3\\case.1.6.3.nupkg.sha512"
+  ],
+  "logs": []
+}

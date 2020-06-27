@@ -1,0 +1,71 @@
+{
+  "version": 3,
+  "targets": {
+    ".NETFramework,Version=v4.7.1": {
+      "Case/1.6.3": {
+        "type": "package"
+      }
+    }
+  },
+  "libraries": {
+    "Case/1.6.3": {
+      "sha512": "swFjftxCE0SBLHSGAESviBWDekg+N8cNAmX4Qm0ZLvL5TGu2Fn7g1vd6AAME8wwJECiLZCx4kIVQy6xl5RNpsw==",
+      "type": "package",
+      "path": "case/1.6.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "case.1.6.3.nupkg.sha512",
+        "case.nuspec",
+        "dist/case.js",
+        "dist/case.min.js",
+        "dist/case.plus.js",
+        "dist/case.plus.min.js"
+      ]
+    }
+  },
+  "projectFileDependencyGroups": {
+    ".NETFramework,Version=v4.7.1": [
+      "Case >= 1.6.3"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\ivans\\.nuget\\packages\\": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "C:\\Users\\ivans\\Crazy Labs Prototype\\Assembly-CSharp.csproj",
+      "projectName": "Assembly-CSharp",
+      "projectPath": "C:\\Users\\ivans\\Crazy Labs Prototype\\Assembly-CSharp.csproj",
+      "packagesPath": "C:\\Users\\ivans\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\ivans\\Crazy Labs Prototype\\obj\\",
+      "projectStyle": "PackageReference",
+      "skipContentFileWrite": true,
+      "configFilePaths": [
+        "C:\\Users\\ivans\\AppData\\Roaming\\NuGet\\NuGet.Config"
+      ],
+      "originalTargetFrameworks": [
+        "net471"
+      ],
+      "sources": {
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net471": {
+          "projectReferences": {}
+        }
+      }
+    },
+    "frameworks": {
+      "net471": {
+        "dependencies": {
+          "Case": {
+            "target": "Package",
+            "version": "[1.6.3, )"
+          }
+        }
+      }
+    }
+  }
+}
