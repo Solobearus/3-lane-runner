@@ -5,22 +5,10 @@ public class GameStateManager : MonoBehaviour
 
     private bool _playing = false;
     private bool _gameOver = false;
+    private int _score = 0;
+    private int _highScore;
 
-    [SerializeReference]
-    [Range(1f, 100f)] private float _playerInitialSpeed = 10F;
 
-    [Range(0.6f, 10f)]
-    private float _heightOfSpawn = 0.6f;
-    [SerializeReference]
-    [Range(10f, 100f)]
-    private float _distanceBetweenObstacles = 20f;
-    [SerializeReference]
-    [Range(1, 100)]
-    private int _itemsPerSpawn = 10;
-    [SerializeReference]
-    [Range(0.1f, 2f)]
-    private float _speedScoreMultiplier = 0.5f;
-    private int _speedSubtractionFromPowerUp = 0;
     public bool playing
     {
         get { return _playing; }
@@ -31,36 +19,21 @@ public class GameStateManager : MonoBehaviour
         get { return _gameOver; }
         set { _gameOver = value; }
     }
-    public float playerInitialSpeed
+    public int score
     {
-        get { return _playerInitialSpeed; }
-        set { _playerInitialSpeed = value; }
+        get { return _score; }
+        set
+        {
+            if (value > _highScore)
+            {
+                _highScore = value;
+            }
+            _score = value;
+        }
     }
-
-    public float heightOfSpawn
+    public int highScore
     {
-        get { return _heightOfSpawn; }
-        set { _heightOfSpawn = value; }
-    }
-    public float distanceBetweenObstacles
-    {
-        get { return _distanceBetweenObstacles; }
-        set { _distanceBetweenObstacles = value; }
-    }
-    public int itemsPerSpawn
-    {
-        get { return _itemsPerSpawn; }
-        set { _itemsPerSpawn = value; }
-    }
-
-    public float speedScoreMultiplier
-    {
-        get { return _speedScoreMultiplier; }
-        set { _speedScoreMultiplier = value; }
-    }
-    public int speedSubtractionFromPowerUp
-    {
-        get { return _speedSubtractionFromPowerUp; }
-        set { _speedSubtractionFromPowerUp = value; }
+        get { return _highScore; }
+        set { _highScore = value; }
     }
 }

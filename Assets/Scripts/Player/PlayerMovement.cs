@@ -5,18 +5,20 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
 
-    private Vector2 startTouchPosition, endTouchPosition;
+    Vector2 startTouchPosition, endTouchPosition;
+    GameObject gameManager;
 
-    private GameStateManager gameStateManager;
-    private GameScoreManager gameScoreManager;
+    GameStateManager gameStateManager;
+    GameConfigManager gameConfigManager;
 
-    private void Start()
+    void Start()
     {
-        gameStateManager = GameObject.Find("GameManager").GetComponent<GameStateManager>();
-        gameScoreManager = GameObject.Find("GameManager").GetComponent<GameScoreManager>();
+        gameManager = GameObject.Find("GameManager");
+        gameStateManager = gameManager.GetComponent<GameStateManager>();
+        gameConfigManager = gameManager.GetComponent<GameConfigManager>();
     }
 
-    private void Update()
+    void Update()
     {
         if (gameStateManager.playing)
         {
@@ -30,14 +32,15 @@ public class PlayerMovement : MonoBehaviour
 
     float calculateSpeedRelativeToScore()
     {
-        float calculatedSpeed = gameStateManager.playerInitialSpeed;
+        float calculatedSpeed = gameConfigManager.playerInitialSpeed;
 
-        calculatedSpeed += gameScoreManager.score * gameStateManager.speedScoreMultiplier;
+        calculatedSpeed += gameStateManager.score * gameConfigManager.speedScoreMultiplier;
 
-        calculatedSpeed -= gameStateManager.speedSubtractionFromPowerUp;
+        calculatedSpeed -= gameConfigManager.speedSubtractionFromPowerUp;
 
-        if(calculatedSpeed < gameStateManager.playerInitialSpeed){
-            calculatedSpeed = gameStateManager.playerInitialSpeed;
+        if (calculatedSpeed < gameConfigManager.playerInitialSpeed)
+        {
+            calculatedSpeed = gameConfigManager.playerInitialSpeed;
         }
 
         return calculatedSpeed;

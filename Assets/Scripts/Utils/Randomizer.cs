@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 static public class Randomizer
 {
     static int[] probabilities = { 40, 21, 2, 2 };
@@ -19,20 +20,20 @@ static public class Randomizer
 
                 if (randomItem < probabilities[0])
                 {
-                    item = 0;
+                    item = 1;
                     obstacleCount++;
                 }
                 else if (randomItem < probabilities[0] + probabilities[1])
                 {
-                    item = 1;
+                    item = 2;
                 }
                 else if (randomItem < probabilities[0] + probabilities[1] + probabilities[2])
                 {
-                    item = 2;
+                    item = 3;
                 }
                 else
                 {
-                    item = 3;
+                    item = 0;
                 }
 
                 randomizedLine[i] = item;

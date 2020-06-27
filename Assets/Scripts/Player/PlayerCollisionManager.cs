@@ -4,20 +4,21 @@ using UnityEngine;
 
 public class PlayerCollisionManager : MonoBehaviour
 {
-    private GameObject gameManger;
-    private GameStateManager gameStateManager;
-    private GameScoreManager gameScoreManager;
+    GameObject gameManager;
+    GameStateManager gameStateManager;
+    GameConfigManager gameConfigManager;
 
+    //TODO move everything to config manager
     int SCORE_FROM_COIN = 1;
     int SCORE_FROM_BIGGER_COIN = 10;
     int LOWER_SPEED_FROM_POWER_UP = 4;
-    private void Start()
+    void Start()
     {
-        gameManger = GameObject.Find("GameManager");
-        gameStateManager = gameManger.GetComponent<GameStateManager>();
-        gameScoreManager = gameManger.GetComponent<GameScoreManager>();
+        gameManager = GameObject.Find("GameManager");
+        gameStateManager = gameManager.GetComponent<GameStateManager>();
+        gameConfigManager = gameManager.GetComponent<GameConfigManager>();
     }
-    private void OnCollisionEnter(Collision other)
+    void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.tag == "Obstacle")
         {
@@ -26,19 +27,19 @@ public class PlayerCollisionManager : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Coin")
         {
-            gameScoreManager.score += SCORE_FROM_COIN;
+            gameStateManager.score += SCORE_FROM_COIN;
         }
         if (other.gameObject.tag == "BiggerCoin")
         {
-            gameScoreManager.score += SCORE_FROM_BIGGER_COIN;
+            gameStateManager.score += SCORE_FROM_BIGGER_COIN;
         }
         if (other.gameObject.tag == "lowerSpeedPowerUp")
         {
-            gameStateManager.speedSubtractionFromPowerUp += LOWER_SPEED_FROM_POWER_UP;
+            gameConfigManager.speedSubtractionFromPowerUp += LOWER_SPEED_FROM_POWER_UP;
         }
     }
 }

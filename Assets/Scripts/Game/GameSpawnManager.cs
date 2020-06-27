@@ -24,23 +24,23 @@ public class GameSpawnManager : MonoBehaviour
     List<GameObject> ItemsOnRoadArray = new List<GameObject>();
     List<GameObject> floorsArray = new List<GameObject>();
     private GameStateManager gameStateManager;
-    private GameScoreManager gameScoreManager;
+    private GameConfigManager gameConfigManager;
     private CameraManager cameraManager;
 
     void Start()
     {
         bookmark = BOOKMARK_START;
         gameStateManager = GetComponent<GameStateManager>();
-        gameScoreManager = GetComponent<GameScoreManager>();
+        gameConfigManager = GetComponent<GameConfigManager>();
         cameraManager = GameObject.Find("MainCamera").GetComponent<CameraManager>();
     }
     private void Update()
     {
         if (gameStateManager.playing)
         {
-            var positionForSpawn = (bookmark - gameStateManager.itemsPerSpawn) * gameStateManager.distanceBetweenObstacles;
+            var positionForSpawn = (bookmark - gameConfigManager.itemsPerSpawn) * gameConfigManager.distanceBetweenObstacles;
 
-            if (currentPlayer.transform.position.z > positionForSpawn && positionForSpawn > gameStateManager.itemsPerSpawn)
+            if (currentPlayer.transform.position.z > positionForSpawn && positionForSpawn > gameConfigManager.itemsPerSpawn)
             {
                 SpawnNextBulk();
             }
@@ -60,14 +60,14 @@ public class GameSpawnManager : MonoBehaviour
         Destroy(currentPlayer);
 
         gameStateManager.playing = true;
-        gameScoreManager.score = 0;
+        gameStateManager.score = 0;
         bookmark = BOOKMARK_START;
         SpawnInitial();
     }
 
     void SpawnInitial()
     {
-        currentPlayer = Instantiate(player, new Vector3(0, gameStateManager.heightOfSpawn, 1.8f), Quaternion.identity);
+        currentPlayer = Instantiate(player, new Vector3(0, gameConfigManager.heightOfSpawn, 1.8f), Quaternion.identity);
         cameraManager.Player = currentPlayer;
         SpawnNextBulk();
     }
@@ -75,7 +75,7 @@ public class GameSpawnManager : MonoBehaviour
     void SpawnNextBulk()
     {
         int i;
-        for (i = bookmark; i < bookmark + gameStateManager.itemsPerSpawn; i++)
+        for (i = bookmark; i < bookmark + gameConfigManager.itemsPerSpawn; i++)
         {
             List<GameObject> line = lineSpawnRandomizer();
 
@@ -85,34 +85,34 @@ public class GameSpawnManager : MonoBehaviour
                 {
                     ItemsOnRoadArray.Add(Instantiate(
                         line[j],
-                        new Vector3((j - 1) * 1.75f, heightOfSpawnCalculator(line[j]), i * gameStateManager.distanceBetweenObstacles),
+                        new Vector3((j - 1) * 1.75f, heightOfSpawnCalculator(line[j]), i * gameConfigManager.distanceBetweenObstacles),
                         Quaternion.identity
                     ));
                 }
             }
         }
 
-        GameObject newFloor = Instantiate(floor, new Vector3(0, 0, i * gameStateManager.distanceBetweenObstacles), Quaternion.identity);
-        newFloor.transform.localScale = new Vector3(newFloor.transform.localScale.x, newFloor.transform.localScale.y, gameStateManager.distanceBetweenObstacles * gameStateManager.itemsPerSpawn);
+        GameObject newFloor = Instantiate(floor, new Vector3(0, 0, i * gameConfigManager.distanceBetweenObstacles), Quaternion.identity);
+        newFloor.transform.localScale = new Vector3(newFloor.transform.localScale.x, newFloor.transform.localScale.y, gameConfigManager.distanceBetweenObstacles * gameConfigManager.itemsPerSpawn);
         floorsArray.Add(newFloor);
 
 
         bookmark = i;
 
-        if (ItemsOnRoadArray.Count > gameStateManager.itemsPerSpawn * 6)
+        if (ItemsOnRoadArray.Count > gameConfigManager.itemsPerSpawn * 6)
         {
-            for (i = 0; i < gameStateManager.itemsPerSpawn; i++)
+            for (i = 0; i < gameConfigManager.itemsPerSpawn; i++)
             {
                 Destroy(ItemsOnRoadArray[i]);
             }
-            ItemsOnRoadArray.RemoveRange(0, gameStateManager.itemsPerSpawn);
+            ItemsOnRoadArray.RemoveRange(0, gameConfigManager.itemsPerSpawn);
         }
     }
 
     List<GameObject> lineSpawnRandomizer()
     {
         List<GameObject> itemsLine = new List<GameObject>();
-        GameObject[] itemsAvaliable = { obstacle, coin, biggerCoin, lowerSpeedPowerUp, null, };
+        GameObject[] itemsAvaliable = { null, obstacle, coin, biggerCoin, lowerSpeedPowerUp, };
 
         int[] randomLine = Randomizer.lineRandomizer();
 
@@ -128,15 +128,15 @@ public class GameSpawnManager : MonoBehaviour
     float heightOfSpawnCalculator(GameObject item)
     {
 
-        float result = gameStateManager.heightOfSpawn;
+        float result = gameConfigManager.heightOfSpawn;
 
         if (item == coin)
         {
-            result = gameStateManager.heightOfSpawn * 1.1f;
+            result = gameConfigManager.heightOfSpawn * 1.1f;
         }
         if (item == biggerCoin)
         {
-            result = gameStateManager.heightOfSpawn * 1.4f;
+            result = gameConfigManager.heightOfSpawn * 1.4f;
         }
         return result;
     }

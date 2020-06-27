@@ -38,11 +38,12 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\Camera\CameraManager.cs" />
      <Compile Include="Assets\Scripts\Collectable\Collectable.cs" />
-     <Compile Include="Assets\Scripts\Game\GameScoreManager.cs" />
+     <Compile Include="Assets\Scripts\Game\GameConfigManager.cs" />
      <Compile Include="Assets\Scripts\Game\GameSpawnManager.cs" />
      <Compile Include="Assets\Scripts\Game\GameStateManager.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerCollisionManager.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
+     <Compile Include="Assets\Scripts\UI\SliderHelper.cs" />
      <Compile Include="Assets\Scripts\UI\UIManager.cs" />
      <Compile Include="Assets\Scripts\Utils\Randomizer.cs" />
     <Reference Include="UnityEngine">

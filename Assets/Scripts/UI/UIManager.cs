@@ -5,71 +5,71 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    private CameraManager _cameraManager;
-    private GameSpawnManager _gameSpawnManager;
-    private GameStateManager _gameStateManager;
-    private GameScoreManager _gameScoreManager;
+    CameraManager cameraManager;
+    GameSpawnManager gameSpawnManager;
+    GameStateManager gameStateManager;
+    GameConfigManager gameConfigManager;
 
     [SerializeReference]
-    private GameObject _startUI;
+    GameObject startUI;
     [SerializeReference]
-    private GameObject _playingUI;
+    GameObject playingUI;
     [SerializeReference]
-    private GameObject _endUI;
+    GameObject endUI;
     [SerializeReference]
-    private GameObject _OptionsUI;
+    GameObject OptionsUI;
 
 
     [SerializeReference]
-    private GameObject _playingUICurrentScore;
+    GameObject playingUICurrentScore;
     [SerializeReference]
-    private GameObject _endUIFianlScore;
+    GameObject endUIFianlScore;
     [SerializeReference]
-    private GameObject _endUIHighScore;
+    GameObject endUIHighScore;
     [SerializeReference]
-    private Slider _cameraDistanceZSlider;
+    Slider cameraDistanceZSlider;
     [SerializeReference]
-    private Slider _cameraDistanceYSlider;
+    Slider cameraDistanceYSlider;
     [SerializeReference]
-    private Slider _cameraXRotationSlider;
+    Slider cameraXRotationSlider;
     [SerializeReference]
-    private Slider _playerInitialSpeedSlider;
+    Slider playerInitialSpeedSlider;
     [SerializeReference]
-    private Slider _itemsPerSpawnSlider;
+    Slider itemsPerSpawnSlider;
     [SerializeReference]
-    private Slider _distanceBetweenObstaclesSlider;
+    Slider distanceBetweenObstaclesSlider;
 
-    private void Start()
+    void Start()
     {
-        _gameSpawnManager = GetComponent<GameSpawnManager>();
-        _gameStateManager = GetComponent<GameStateManager>();
-        _gameScoreManager = GetComponent<GameScoreManager>();
-        _cameraManager = GameObject.Find("MainCamera").GetComponent<CameraManager>();
+        gameSpawnManager = GetComponent<GameSpawnManager>();
+        gameStateManager = GetComponent<GameStateManager>();
+        gameConfigManager = GetComponent<GameConfigManager>();
+        cameraManager = GameObject.Find("MainCamera").GetComponent<CameraManager>();
         disablePlayingUI();
         GoToMainMenu();
     }
 
-    private void Update()
+    void Update()
     {
-        if (_gameStateManager.playing)
+        if (gameStateManager.playing)
         {
-            _playingUICurrentScore.GetComponent<Text>().text = "Score : " + _gameScoreManager.score;
+            playingUICurrentScore.GetComponent<Text>().text = "Score : " + gameStateManager.score;
         }
-        else if (_gameStateManager.gameOver)
+        else if (gameStateManager.gameOver)
         {
             GameOver();
-            _gameStateManager.gameOver = false;
+            gameStateManager.gameOver = false;
         }
     }
 
 
     public void ResetGame()
     {
-        _gameSpawnManager.Restart();
+        gameSpawnManager.Restart();
     }
     public void StartGame()
     {
-        _gameSpawnManager.Restart();
+        gameSpawnManager.Restart();
         enablePlayingUI();
         disableStartUI();
     }
@@ -88,7 +88,7 @@ public class UIManager : MonoBehaviour
 
     public void PlayAgain()
     {
-        _gameSpawnManager.Restart();
+        gameSpawnManager.Restart();
         enablePlayingUI();
         disableEndUI();
     }
@@ -97,54 +97,54 @@ public class UIManager : MonoBehaviour
     {
         disablePlayingUI();
         enableEndUI();
-        _endUIFianlScore.GetComponent<Text>().text = "Final Score : " + _gameScoreManager.score;
-        _endUIHighScore.GetComponent<Text>().text = "High Score : " + _gameScoreManager.highScore;
+        endUIFianlScore.GetComponent<Text>().text = "Final Score : " + gameStateManager.score;
+        endUIHighScore.GetComponent<Text>().text = "High Score : " + gameStateManager.highScore;
     }
 
-    void disableStartUI() { _startUI.SetActive(false); }
-    void enableStartUI() { _startUI.SetActive(true); }
-    void disablePlayingUI() { _playingUI.SetActive(false); }
-    void enablePlayingUI() { _playingUI.SetActive(true); }
-    void disableEndUI() { _endUI.SetActive(false); }
-    void enableEndUI() { _endUI.SetActive(true); }
-    void disableOptionsUI() { _OptionsUI.SetActive(false); }
-    void enableOptionsUI() { _OptionsUI.SetActive(true); }
+    void disableStartUI() { startUI.SetActive(false); }
+    void enableStartUI() { startUI.SetActive(true); }
+    void disablePlayingUI() { playingUI.SetActive(false); }
+    void enablePlayingUI() { playingUI.SetActive(true); }
+    void disableEndUI() { endUI.SetActive(false); }
+    void enableEndUI() { endUI.SetActive(true); }
+    void disableOptionsUI() { OptionsUI.SetActive(false); }
+    void enableOptionsUI() { OptionsUI.SetActive(true); }
 
 
     //OPTIONS MENU MANAGER
 
     public void InitOptions()
     {
-        _cameraDistanceZSlider.value = _cameraManager.cameraDistanceZ;
-        _cameraDistanceYSlider.value = _cameraManager.cameraDistanceY;
-        _cameraXRotationSlider.value = _cameraManager.cameraRotationX;
-        _playerInitialSpeedSlider.value = _gameStateManager.playerInitialSpeed;
-        _itemsPerSpawnSlider.value = _gameStateManager.itemsPerSpawn;
-        _distanceBetweenObstaclesSlider.value = _gameStateManager.distanceBetweenObstacles;
+        cameraDistanceZSlider.value = cameraManager.cameraDistanceZ;
+        cameraDistanceYSlider.value = cameraManager.cameraDistanceY;
+        cameraXRotationSlider.value = cameraManager.cameraRotationX;
+        playerInitialSpeedSlider.value = gameConfigManager.playerInitialSpeed;
+        itemsPerSpawnSlider.value = gameConfigManager.itemsPerSpawn;
+        distanceBetweenObstaclesSlider.value = gameConfigManager.distanceBetweenObstacles;
     }
     public void OnCameraZSliderChange(Slider slider)
     {
-        _cameraManager.cameraDistanceZ = slider.value;
+        cameraManager.cameraDistanceZ = slider.value;
     }
     public void OnCameraYSliderChange(Slider slider)
     {
-        _cameraManager.cameraDistanceY = slider.value;
+        cameraManager.cameraDistanceY = slider.value;
     }
     public void OnCameraXRotationSliderChange(Slider slider)
     {
-        _cameraManager.cameraRotationX = slider.value;
+        cameraManager.cameraRotationX = slider.value;
     }
     public void OnplayerInitialSpeedSliderChange(Slider slider)
     {
-        _gameStateManager.playerInitialSpeed = slider.value;
+        gameConfigManager.playerInitialSpeed = slider.value;
     }
     public void OnItemsPerSpawnSliderChange(Slider slider)
     {
-        _gameStateManager.itemsPerSpawn = (int)slider.value;
+        gameConfigManager.itemsPerSpawn = (int)slider.value;
     }
     public void OnDistanceBetweenObstaclesSliderChange(Slider slider)
     {
-        _gameStateManager.distanceBetweenObstacles = slider.value;
+        gameConfigManager.distanceBetweenObstacles = slider.value;
     }
     public void Preset1Button() { changeValuesToPreset(4f, 1f, 0f); }
     public void Preset2Button() { changeValuesToPreset(-11f, 25f, 90f); }
@@ -153,12 +153,12 @@ public class UIManager : MonoBehaviour
 
     public void changeValuesToPreset(float z, float y, float x)
     {
-        _cameraManager.cameraDistanceZ = z;
-        _cameraManager.cameraDistanceY = y;
-        _cameraManager.cameraRotationX = x;
-        _cameraDistanceZSlider.value = _cameraManager.cameraDistanceZ;
-        _cameraDistanceYSlider.value = _cameraManager.cameraDistanceY;
-        _cameraXRotationSlider.value = _cameraManager.cameraRotationX;
+        cameraManager.cameraDistanceZ = z;
+        cameraManager.cameraDistanceY = y;
+        cameraManager.cameraRotationX = x;
+        cameraDistanceZSlider.value = cameraManager.cameraDistanceZ;
+        cameraDistanceYSlider.value = cameraManager.cameraDistanceY;
+        cameraXRotationSlider.value = cameraManager.cameraRotationX;
     }
 
 }
