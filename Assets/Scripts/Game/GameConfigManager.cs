@@ -103,11 +103,10 @@ public class GameConfigManager : MonoBehaviour
     }
 
     [SerializeReference]
-    [Range(0f, 100f)]
-    float _probabilityObstacle = 1f;
+    float _probabilityObstacle = 20f;
 
-    const float MIN_PROBABILITY_OBSTACLE = 0f;
-    const float MAX_PROBABILITY_OBSTACLE = 100f;
+    public const float MIN_PROBABILITY_OBSTACLE = 0f;
+    public const float MAX_PROBABILITY_OBSTACLE = 100f;
     public float probabilityObstacle
     {
         get { return _probabilityObstacle; }
@@ -118,8 +117,8 @@ public class GameConfigManager : MonoBehaviour
     [Range(0f, 100f)]
     float _probabilityCoin = 10f;
 
-    const float MIN_PROBABILITY_COIN = 0f;
-    const float MAX_PROBABILITY_COIN = 100f;
+    public const float MIN_PROBABILITY_COIN = 0f;
+    public const float MAX_PROBABILITY_COIN = 100f;
     public float probabilityCoin
     {
         get { return _probabilityCoin; }
@@ -130,8 +129,8 @@ public class GameConfigManager : MonoBehaviour
     [Range(0f, 100f)]
     float _probabilitySlowPowerUp = 1f;
 
-    const float MIN_PROBABILITY_SLOW_POWER_UP = 0f;
-    const float MAX_PROBABILITY_SLOW_POWER_UP = 100f;
+    public const float MIN_PROBABILITY_SLOW_POWER_UP = 0f;
+    public const float MAX_PROBABILITY_SLOW_POWER_UP = 100f;
     public float probabilitySlowPowerUp
     {
         get { return _probabilitySlowPowerUp; }
@@ -142,8 +141,8 @@ public class GameConfigManager : MonoBehaviour
     [Range(0f, 100f)]
     float _probabilityBigCoin = 0;
 
-    const float MIN_PROBABILITY_BIG_COIN = 0f;
-    const float MAX_PROBABILITY_BIG_COIN = 100f;
+    public const float MIN_PROBABILITY_BIG_COIN = 0f;
+    public const float MAX_PROBABILITY_BIG_COIN = 100f;
     public float probabilityBigCoin
     {
         get { return _probabilityBigCoin; }

@@ -16,12 +16,27 @@ public class SliderHelper : MonoBehaviour
     Text rowTitle;
     [SerializeReference]
     Slider slider;
+
+    bool _isInt = false;
     void Start()
     {
         gameManager = GameObject.Find("GameManager");
         gameConfigManager = gameManager.GetComponent<GameConfigManager>();
 
-        rowTitle.text = CamelCaseToTitleCase(affectedVariable) + " : " + slider.value.ToString("0.00");
+        var valueFromConfig = gameConfigManager.GetType().GetProperty(affectedVariable).GetValue(gameConfigManager, null);
+
+        if (valueFromConfig is int)
+        {
+            slider.value = (int)valueFromConfig;
+            slider.wholeNumbers = true;
+            _isInt = true;
+            rowTitle.text = CamelCaseToTitleCase(affectedVariable) + " : " + slider.value;
+        }
+        else
+        {
+            slider.value = (float)valueFromConfig;
+            rowTitle.text = CamelCaseToTitleCase(affectedVariable) + " : " + slider.value.ToString("0.00");
+        }
 
         string constCase = CamelCaseToConstCase(affectedVariable);
 
@@ -36,8 +51,17 @@ public class SliderHelper : MonoBehaviour
 
     public void OnSliderWasChanged()
     {
-        gameConfigManager.GetType().GetProperty(affectedVariable).SetValue(gameConfigManager, slider.value);
-        rowTitle.text = CamelCaseToTitleCase(affectedVariable) + " : " + slider.value.ToString("0.00");
+        if (_isInt)
+        {
+            gameConfigManager.GetType().GetProperty(affectedVariable).SetValue(gameConfigManager, (int)slider.value);
+            rowTitle.text = CamelCaseToTitleCase(affectedVariable) + " : " + slider.value;
+        }
+        else
+        {
+            gameConfigManager.GetType().GetProperty(affectedVariable).SetValue(gameConfigManager, slider.value);
+            rowTitle.text = CamelCaseToTitleCase(affectedVariable) + " : " + slider.value.ToString("0.00");
+        }
+
     }
 
 

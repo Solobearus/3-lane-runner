@@ -83,14 +83,11 @@ public class UIManager : MonoBehaviour
     {
     }
  
-    public void changeValuesToPreset(float z, float y, float x)
+    public void changeValuesToPreset(int presetId)
     {
-        // cameraManager.cameraDistanceZ = z;
-        // cameraManager.cameraDistanceY = y;
-        // cameraManager.cameraRotationX = x;
-        // cameraDistanceZSlider.value = cameraManager.cameraDistanceZ;
-        // cameraDistanceYSlider.value = cameraManager.cameraDistanceY;
-        // cameraXRotationSlider.value = cameraManager.cameraRotationX;
-    }
 
+        // gameConfigManager.cameraDistanceZ = z;
+        // gameConfigManager.cameraDistanceY = y;
+        // gameConfigManager.cameraRotationX = x;
+    }
 }
