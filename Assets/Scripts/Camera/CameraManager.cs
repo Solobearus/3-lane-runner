@@ -2,30 +2,19 @@ using UnityEngine;
 
 public class CameraManager : MonoBehaviour
 {
-    [SerializeReference]
-    [Range(-50f, 50f)]
-    private float _cameraDistanceZ = 6.0F;
-    [SerializeReference]
-    [Range(-50f, 50f)]
-    private float _cameraDistanceY = 1.0F;
-    [SerializeReference]
-    [Range(-90f, 90f)]
-    private float _cameraRotationX;
-    public float cameraDistanceZ
-    {
-        get { return _cameraDistanceZ; }
-        set { _cameraDistanceZ = value; }
-    }
-    public float cameraDistanceY
-    {
-        get { return _cameraDistanceY; }
-        set { _cameraDistanceY = value; }
-    }
-    public float cameraRotationX { 
-        get { return _cameraRotationX; }
-        set { _cameraRotationX = value; }
-    }
+
+
     private GameObject _player;
+
+    GameConfigManager gameConfigManager;
+    GameObject gameManager;
+
+    private void Start()
+    {
+        gameManager = GameObject.Find("GameManager");
+        gameConfigManager = gameManager.GetComponent<GameConfigManager>();
+    }
+
     public GameObject Player
     {
         get { return _player; }
@@ -37,12 +26,12 @@ public class CameraManager : MonoBehaviour
         {
             Vector3 newCameraPosition = new Vector3(
                 _player.transform.position.x,
-                _player.transform.position.y + cameraDistanceY,
-                _player.transform.position.z - cameraDistanceZ
+                _player.transform.position.y + gameConfigManager.cameraDistanceY,
+                _player.transform.position.z - gameConfigManager.cameraDistanceZ
             );
 
             transform.position = newCameraPosition;
-            transform.rotation = Quaternion.Euler(_cameraRotationX, 0, 0);
+            transform.rotation = Quaternion.Euler(gameConfigManager.cameraRotationX, 0, 0);
         }
     }
 }

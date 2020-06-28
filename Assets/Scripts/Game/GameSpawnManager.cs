@@ -5,27 +5,28 @@ using UnityEngine;
 public class GameSpawnManager : MonoBehaviour
 {
     [SerializeReference]
-    private GameObject player;
+    GameObject player;
     [SerializeReference]
-    private GameObject obstacle;
+    GameObject obstacle;
     [SerializeReference]
-    private GameObject coin;
+    GameObject coin;
     [SerializeReference]
-    private GameObject biggerCoin;
+    GameObject biggerCoin;
     [SerializeReference]
-    private GameObject lowerSpeedPowerUp;
+    GameObject lowerSpeedPowerUp;
     [SerializeReference]
-    private GameObject floor;
+    GameObject floor;
 
-    private int BOOKMARK_START = 1;
-    private int bookmark = 0;
-    private GameObject currentPlayer;
+    float HEIGHT_OF_SPAWN = 0.6f;
+    int BOOKMARK_START = 1;
+    int bookmark = 0;
+    GameObject currentPlayer;
 
     List<GameObject> ItemsOnRoadArray = new List<GameObject>();
     List<GameObject> floorsArray = new List<GameObject>();
-    private GameStateManager gameStateManager;
-    private GameConfigManager gameConfigManager;
-    private CameraManager cameraManager;
+    GameStateManager gameStateManager;
+    GameConfigManager gameConfigManager;
+    CameraManager cameraManager;
 
     void Start()
     {
@@ -34,7 +35,7 @@ public class GameSpawnManager : MonoBehaviour
         gameConfigManager = GetComponent<GameConfigManager>();
         cameraManager = GameObject.Find("MainCamera").GetComponent<CameraManager>();
     }
-    private void Update()
+    void Update()
     {
         if (gameStateManager.playing)
         {
@@ -67,7 +68,7 @@ public class GameSpawnManager : MonoBehaviour
 
     void SpawnInitial()
     {
-        currentPlayer = Instantiate(player, new Vector3(0, gameConfigManager.heightOfSpawn, 1.8f), Quaternion.identity);
+        currentPlayer = Instantiate(player, new Vector3(0, HEIGHT_OF_SPAWN, 1.8f), Quaternion.identity);
         cameraManager.Player = currentPlayer;
         SpawnNextBulk();
     }
@@ -128,15 +129,15 @@ public class GameSpawnManager : MonoBehaviour
     float heightOfSpawnCalculator(GameObject item)
     {
 
-        float result = gameConfigManager.heightOfSpawn;
+        float result = HEIGHT_OF_SPAWN;
 
         if (item == coin)
         {
-            result = gameConfigManager.heightOfSpawn * 1.1f;
+            result = HEIGHT_OF_SPAWN * 1.1f;
         }
         if (item == biggerCoin)
         {
-            result = gameConfigManager.heightOfSpawn * 1.4f;
+            result = HEIGHT_OF_SPAWN * 1.4f;
         }
         return result;
     }

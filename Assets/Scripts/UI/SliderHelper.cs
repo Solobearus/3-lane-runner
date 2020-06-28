@@ -19,21 +19,40 @@ public class SliderHelper : MonoBehaviour
     void Start()
     {
         gameManager = GameObject.Find("GameManager");
+        gameConfigManager = gameManager.GetComponent<GameConfigManager>();
 
-        rowTitle.text = CamelCaseToTitleCase(affectedVariable);
+        rowTitle.text = CamelCaseToTitleCase(affectedVariable) + " : " + slider.value.ToString("0.00");
+
+        string constCase = CamelCaseToConstCase(affectedVariable);
+
         slider.onValueChanged.AddListener(delegate { OnSliderWasChanged(); });
-    }
 
-    string CamelCaseToTitleCase(string str)
-    {
-        string output = Regex.Replace(str, @"[A-Z]", m => " " + m.Value.ToUpperInvariant());
-        return char.ToUpperInvariant(output[0]) + output.Substring(1) + " : ";
+        float minValue = (float)gameConfigManager.GetType().GetField("MIN_" + constCase).GetValue(gameConfigManager);
+        float maxValue = (float)gameConfigManager.GetType().GetField("MAX_" + constCase).GetValue(gameConfigManager);
+
+        slider.minValue = minValue;
+        slider.maxValue = maxValue;
     }
 
     public void OnSliderWasChanged()
     {
-        var test = gameConfigManager.GetType().GetProperty(affectedVariable);
-        Debug.Log(test);
-        test.SetValue(gameConfigManager, slider.value);
+        gameConfigManager.GetType().GetProperty(affectedVariable).SetValue(gameConfigManager, slider.value);
+        rowTitle.text = CamelCaseToTitleCase(affectedVariable) + " : " + slider.value.ToString("0.00");
+    }
+
+
+    string CamelCaseToTitleCase(string str)
+    {
+        string output = Regex.Replace(str, @"[A-Z]", m => " " + m.Value.ToUpper());
+        output = char.ToUpper(output[0]) + output.Substring(1);
+
+        return output;
+    }
+
+    string CamelCaseToConstCase(string str)
+    {
+        string output = Regex.Replace(str, @"[A-Z]", m => "_" + m.Value.ToUpper());
+        output = Regex.Replace(output, @"[a-z]", m => m.Value.ToUpper());
+        return output;
     }
 }
