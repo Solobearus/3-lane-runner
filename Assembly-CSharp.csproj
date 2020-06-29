@@ -55,6 +55,7 @@
      <None Include="Assets\External packages\Toon Gas Station\ToonShading\Shaders\ToonBasic.shader" />
      <None Include="Assets\External packages\Toon Gas Station\ToonShading\Shaders\ToonLit.shader" />
      <None Include="Assets\External packages\Toon Gas Station\ToonShading\Shaders\ToonLitOutline.shader" />
+     <None Include="Assets\Simple city plain\Read_me.txt" />
      <None Include="Assets\External packages\Toon Gas Station\Documentation\Toon Gas Station Documentation.txt" />
     <Reference Include="UnityEngine">
         <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.1f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>

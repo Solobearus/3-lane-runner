@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/prototype_0.5.unity
+- path: Assets/Resources/Scenes/prototype_0.7.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
