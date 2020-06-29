@@ -83,8 +83,8 @@ public class UIManager : MonoBehaviour
     }
     public void StartGame()
     {
-        gameSpawnManager.Restart();
         SwitchScreen(1);
+        gameSpawnManager.Restart();
     }
 
     public void changeValuesToPreset(int presetId)

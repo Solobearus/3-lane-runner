@@ -30,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    
+
 
     float CheckMovement()
     {
@@ -43,11 +43,11 @@ public class PlayerMovement : MonoBehaviour
         {
             endTouchPosition = Input.GetTouch(0).position;
 
-            if ((endTouchPosition.x < startTouchPosition.x) && transform.position.x > -1.5f)
+            if ((endTouchPosition.x + 100f < startTouchPosition.x) && transform.position.x > -1.5f)
             {
                 xAxisMovement = -1.75f;
             }
-            if ((endTouchPosition.x > startTouchPosition.x) && transform.position.x < 1.5f)
+            if ((endTouchPosition.x - 100f > startTouchPosition.x) && transform.position.x < 1.5f)
                 xAxisMovement = 1.75f;
         }
 

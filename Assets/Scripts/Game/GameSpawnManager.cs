@@ -38,7 +38,7 @@ public class GameSpawnManager : MonoBehaviour
         cameraManager = GameObject.Find("MainCamera").GetComponent<CameraManager>();
 
 
-        
+
     }
 
     void Update()
@@ -56,6 +56,8 @@ public class GameSpawnManager : MonoBehaviour
 
     public void Restart()
     {
+        gameStateManager.speed = gameConfigManager.playerInitialSpeed;
+        
         foreach (var item in ItemsOnRoadArray)
         {
             Destroy(item);
@@ -87,7 +89,7 @@ public class GameSpawnManager : MonoBehaviour
         probabilities.Add(new KeyValuePair<GameObject, float>(coin, gameConfigManager.probabilityCoin));
         probabilities.Add(new KeyValuePair<GameObject, float>(biggerCoin, gameConfigManager.probabilityBigCoin));
         probabilities.Add(new KeyValuePair<GameObject, float>(lowerSpeedPowerUp, gameConfigManager.probabilitySlowPowerUp));
-        
+
         int i;
         for (i = bookmark; i < bookmark + gameConfigManager.itemsPerSpawn; i++)
         {

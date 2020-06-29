@@ -1,9 +1,16 @@
 using UnityEngine;
+using UnityEngine.UI;
+using System.Collections;
+using System.Collections.Generic;
 
 public class GameStateManager : MonoBehaviour
 {
 
     GameConfigManager gameConfigManager;
+    [SerializeReference]
+    GameObject scoreToast;
+    [SerializeReference]
+    GameObject speedToast;
 
     private bool _playing = false;
     private bool _gameOver = false;
@@ -36,6 +43,7 @@ public class GameStateManager : MonoBehaviour
             {
                 _highScore = value;
             }
+            scoreToast.GetComponent<Toast>().showToast("Score +" + (value - _score), 1);
             _score = value;
         }
     }
@@ -48,17 +56,26 @@ public class GameStateManager : MonoBehaviour
     private void Start()
     {
         gameConfigManager = GetComponent<GameConfigManager>();
-        speed = gameConfigManager.playerInitialSpeed;
     }
 
     float calculateSpeedRelativeToScore(float value)
     {
+        Toast toast = speedToast.GetComponent<Toast>();
         if (value < gameConfigManager.playerInitialSpeed)
         {
+            toast.showToast("Speed -" + (speed - gameConfigManager.playerInitialSpeed), 1);
             return gameConfigManager.playerInitialSpeed;
         }
         else
         {
+            if (value > speed)
+            {
+                toast.showToast("Speed +" + (value - speed), 1);
+            }
+            else
+            {
+                toast.showToast("Speed -" + (speed - value), 1);
+            }
             return value;
         }
     }

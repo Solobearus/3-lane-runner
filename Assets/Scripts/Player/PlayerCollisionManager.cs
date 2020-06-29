@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerCollisionManager : MonoBehaviour
 {
@@ -29,16 +30,21 @@ public class PlayerCollisionManager : MonoBehaviour
         if (other.gameObject.tag == "Coin")
         {
             gameStateManager.score += gameConfigManager.scoreFromCoin;
-            gameStateManager.speed += gameConfigManager.scoreFromCoin * gameConfigManager.speedScoreMultiplier ;
+            gameStateManager.speed += gameConfigManager.scoreFromCoin * gameConfigManager.speedScoreMultiplier;
+
         }
         if (other.gameObject.tag == "BiggerCoin")
         {
             gameStateManager.score += gameConfigManager.scoreFromBiggerCoin;
-            gameStateManager.speed += gameConfigManager.scoreFromBiggerCoin * gameConfigManager.speedScoreMultiplier ;
+            gameStateManager.speed += gameConfigManager.scoreFromBiggerCoin * gameConfigManager.speedScoreMultiplier;
         }
         if (other.gameObject.tag == "lowerSpeedPowerUp")
         {
             gameStateManager.speed -= gameConfigManager.speedSubtractionFromPowerUp;
         }
     }
+
+
+
+    
 }
