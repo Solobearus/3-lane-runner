@@ -40,7 +40,7 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.Text
     - UnityEngine.UI.VerticalLayoutGroup
   sceneClasses:
-    Assets/Resources/Scenes/SampleScene.unity:
+    Assets/prototype_0.5.unity:
     - Class: 1
       Script: {instanceID: 0}
     - Class: 4
@@ -532,7 +532,7 @@ ScriptsOnlyBuild:
     className: PlayerMovement
   - hash:
       serializedVersion: 2
-      Hash: 99931096ae969d75e99417bb4d40cdab
+      Hash: 4b40e31f5f33b4c4544ac1e8519e7264
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: UIManager
@@ -640,5 +640,5 @@ ScriptsOnlyBuild:
     className: EndScreen
   platform: 13
   scenePathNames:
-  - Assets/Resources/Scenes/SampleScene.unity
-  playerPath: C:/Projects/Unity/CrazyLabs Prototype/TheGame.apk
+  - Assets/prototype_0.5.unity
+  playerPath: C:/Projects/Unity/CrazyLabs Prototype/prototype_v0.4.apk

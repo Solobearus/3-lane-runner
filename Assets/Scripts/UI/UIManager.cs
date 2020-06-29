@@ -21,6 +21,8 @@ public class UIManager : MonoBehaviour
     [SerializeReference]
     Text scoreText;
     [SerializeReference]
+    Text speedText;
+    [SerializeReference]
     Slider cameraDistanseZSlider;
     [SerializeReference]
     Slider cameraDistanseYSlider;
@@ -50,7 +52,8 @@ public class UIManager : MonoBehaviour
     {
         if (gameStateManager.playing)
         {
-            scoreText.GetComponent<Text>().text = "Score : " + gameStateManager.score;
+            scoreText.text = "Score : " + gameStateManager.score;
+            speedText.text = "Speed : " + gameStateManager.speed;
         }
         else if (gameStateManager.gameOver)
         {

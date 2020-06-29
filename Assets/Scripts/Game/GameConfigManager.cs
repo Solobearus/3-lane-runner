@@ -149,5 +149,37 @@ public class GameConfigManager : MonoBehaviour
         set { _probabilityBigCoin = value; }
     }
 
+    [SerializeReference]
+    [Range(1, 10)]
+    int _scoreFromCoin = 1;
 
+    public const float MIN_SCORE_FROM_COIN = 0;
+    public const float MAX_SCORE_FROM_COIN = 10;
+    public int scoreFromCoin
+    {
+        get { return _scoreFromCoin; }
+        set { _scoreFromCoin = value; }
+    }
+
+    [SerializeReference]
+    [Range(1, 50)]
+    int _scoreFromBiggerCoin = 5;
+    
+    public const float MIN_SCORE_FROM_BIGGER_COIN = 1;
+    public const float MAX_SCORE_FROM_BIGGER_COIN = 50;
+    public int scoreFromBiggerCoin { 
+        get { return _scoreFromBiggerCoin; }
+        set { _scoreFromBiggerCoin = value; }
+    }
+
+    [SerializeReference]
+    [Range(1, 50)]
+    int _lowerSpeedFromPowerUp = 0;
+    
+    public const float MIN_LOWER_SPEED_FROM_POWER_UP = 1;
+    public const float MAX_LOWER_SPEED_FROM_POWER_UP = 50;
+    public int lowerSpeedFromPowerUp { 
+        get { return _lowerSpeedFromPowerUp; }
+        set { _lowerSpeedFromPowerUp = value; }
+    }
 }

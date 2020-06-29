@@ -25,26 +25,12 @@ public class PlayerMovement : MonoBehaviour
             float xAxisMovement = CheckMovement();
 
 
-            Vector3 newPlayerPosition = new Vector3(transform.position.x + xAxisMovement, transform.position.y, transform.position.z + calculateSpeedRelativeToScore() * Time.deltaTime);
+            Vector3 newPlayerPosition = new Vector3(transform.position.x + xAxisMovement, transform.position.y, transform.position.z + gameStateManager.speed * Time.deltaTime);
             transform.position = newPlayerPosition;
         }
     }
 
-    float calculateSpeedRelativeToScore()
-    {
-        float calculatedSpeed = gameConfigManager.playerInitialSpeed;
-
-        calculatedSpeed += gameStateManager.score * gameConfigManager.speedScoreMultiplier;
-
-        calculatedSpeed -= gameConfigManager.speedSubtractionFromPowerUp;
-
-        if (calculatedSpeed < gameConfigManager.playerInitialSpeed)
-        {
-            calculatedSpeed = gameConfigManager.playerInitialSpeed;
-        }
-
-        return calculatedSpeed;
-    }
+    
 
     float CheckMovement()
     {
@@ -57,11 +43,11 @@ public class PlayerMovement : MonoBehaviour
         {
             endTouchPosition = Input.GetTouch(0).position;
 
-            if ((endTouchPosition.x < startTouchPosition.x) && transform.position.x > -1.75f)
+            if ((endTouchPosition.x < startTouchPosition.x) && transform.position.x > -1.5f)
             {
                 xAxisMovement = -1.75f;
             }
-            if ((endTouchPosition.x > startTouchPosition.x) && transform.position.x < 1.75f)
+            if ((endTouchPosition.x > startTouchPosition.x) && transform.position.x < 1.5f)
                 xAxisMovement = 1.75f;
         }
 

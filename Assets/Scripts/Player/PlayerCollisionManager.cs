@@ -8,10 +8,7 @@ public class PlayerCollisionManager : MonoBehaviour
     GameStateManager gameStateManager;
     GameConfigManager gameConfigManager;
 
-    //TODO move everything to config manager
-    int SCORE_FROM_COIN = 1;
-    int SCORE_FROM_BIGGER_COIN = 10;
-    int LOWER_SPEED_FROM_POWER_UP = 4;
+
     void Start()
     {
         gameManager = GameObject.Find("GameManager");
@@ -31,15 +28,17 @@ public class PlayerCollisionManager : MonoBehaviour
     {
         if (other.gameObject.tag == "Coin")
         {
-            gameStateManager.score += SCORE_FROM_COIN;
+            gameStateManager.score += gameConfigManager.scoreFromCoin;
+            gameStateManager.speed += gameConfigManager.scoreFromCoin * gameConfigManager.speedScoreMultiplier ;
         }
         if (other.gameObject.tag == "BiggerCoin")
         {
-            gameStateManager.score += SCORE_FROM_BIGGER_COIN;
+            gameStateManager.score += gameConfigManager.scoreFromBiggerCoin;
+            gameStateManager.speed += gameConfigManager.scoreFromBiggerCoin * gameConfigManager.speedScoreMultiplier ;
         }
         if (other.gameObject.tag == "lowerSpeedPowerUp")
         {
-            gameConfigManager.speedSubtractionFromPowerUp += LOWER_SPEED_FROM_POWER_UP;
+            gameStateManager.speed -= gameConfigManager.speedSubtractionFromPowerUp;
         }
     }
 }
