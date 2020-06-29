@@ -40,7 +40,7 @@ public class PlayerCollisionManager : MonoBehaviour
         }
         if (other.gameObject.tag == "lowerSpeedPowerUp")
         {
-            gameStateManager.speed -= gameConfigManager.speedSubtractionFromPowerUp;
+            gameStateManager.speed -= gameConfigManager.lowerSpeedFromPowerUp;
         }
     }
 

@@ -17,9 +17,13 @@ public class GameSpawnManager : MonoBehaviour
     [SerializeReference]
     GameObject floor;
 
-    float HEIGHT_OF_SPAWN = 0.6f;
-    int BOOKMARK_START = 1;
-    int bookmark = 0;
+    const float HEIGHT_OF_SPAWN = 0.6f;
+    const float FLOOR_TO_SPAWN_LOCATION_START = 0;
+    float floorToSpawnLocation = 0;
+    const int BOOKMARK_START = 1;
+    int bookmark = 1;
+    float floorSize = 0;
+
     GameObject currentPlayer;
 
     List<GameObject> ItemsOnRoadArray = new List<GameObject>();
@@ -30,6 +34,7 @@ public class GameSpawnManager : MonoBehaviour
 
     List<KeyValuePair<GameObject, float>> probabilities;
 
+
     void Start()
     {
         bookmark = BOOKMARK_START;
@@ -37,8 +42,8 @@ public class GameSpawnManager : MonoBehaviour
         gameConfigManager = GetComponent<GameConfigManager>();
         cameraManager = GameObject.Find("MainCamera").GetComponent<CameraManager>();
 
-
-
+        floorSize = floor.GetComponent<MeshRenderer>().bounds.size.x;
+        Debug.Log(floorSize);
     }
 
     void Update()
@@ -56,8 +61,7 @@ public class GameSpawnManager : MonoBehaviour
 
     public void Restart()
     {
-        gameStateManager.speed = gameConfigManager.playerInitialSpeed;
-        
+
         foreach (var item in ItemsOnRoadArray)
         {
             Destroy(item);
@@ -71,7 +75,10 @@ public class GameSpawnManager : MonoBehaviour
         gameStateManager.playing = true;
         gameStateManager.score = 0;
         bookmark = BOOKMARK_START;
+        floorToSpawnLocation = FLOOR_TO_SPAWN_LOCATION_START;
         SpawnInitial();
+
+        gameStateManager.speed = gameConfigManager.playerInitialSpeed;
     }
 
     void SpawnInitial()
@@ -83,6 +90,7 @@ public class GameSpawnManager : MonoBehaviour
 
     void SpawnNextBulk()
     {
+        //TODO update on change not on spawn
         probabilities = new List<KeyValuePair<GameObject, float>>();
 
         probabilities.Add(new KeyValuePair<GameObject, float>(obstacle, gameConfigManager.probabilityObstacle));
@@ -104,16 +112,20 @@ public class GameSpawnManager : MonoBehaviour
                         new Vector3((j - 1) * 1.75f, heightOfSpawnCalculator(line[j]), i * gameConfigManager.distanceBetweenObstacles),
                         Quaternion.identity
                     ));
+
                 }
             }
         }
 
-        GameObject newFloor = Instantiate(floor, new Vector3(0, 0, i * gameConfigManager.distanceBetweenObstacles), Quaternion.identity);
-        newFloor.transform.localScale = new Vector3(newFloor.transform.localScale.x, newFloor.transform.localScale.y, gameConfigManager.distanceBetweenObstacles * gameConfigManager.itemsPerSpawn);
-        floorsArray.Add(newFloor);
-
-
         bookmark = i;
+
+        while (floorToSpawnLocation < bookmark * gameConfigManager.distanceBetweenObstacles)
+        {
+            GameObject newFloor = Instantiate(floor, new Vector3(0, 0, floorToSpawnLocation), Quaternion.identity);
+            floorsArray.Add(newFloor);
+
+            floorToSpawnLocation += floorSize;
+        }
 
         if (ItemsOnRoadArray.Count > gameConfigManager.itemsPerSpawn * 6)
         {

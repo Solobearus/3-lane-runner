@@ -14,10 +14,13 @@ public class Toast : MonoBehaviour
     private void Start()
     {
         canvas = GameObject.Find("Canvas");
+        Debug.Log(canvas);
     }
     public void showToast(string text, float duration)
     {
-        GameObject newTxt = Instantiate(txt, new Vector3( transform.position.x, transform.position.y - 500f, transform.position.z), transform.rotation);
+        GameObject newTxt = Instantiate(txt, transform.position, transform.rotation);
+        canvas = GameObject.Find("Canvas");
+
         newTxt.transform.SetParent(canvas.transform);
 
         newTxt.GetComponent<Text>().text = text;

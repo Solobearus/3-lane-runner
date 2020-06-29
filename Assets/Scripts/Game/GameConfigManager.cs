@@ -90,19 +90,10 @@ public class GameConfigManager : MonoBehaviour
         set { _speedScoreMultiplier = value; }
     }
 
-    [SerializeReference]
-    [Range(0.1f, 10f)]
-    float _speedSubtractionFromPowerUp = 1f;
-
-    public const float MIN_SPEED_SUBTRACTION_FROM_POWER_UP = 0.1f;
-    public const float MAX_SPEED_SUBTRACTION_FROM_POWER_UP = 2f;
-    public float speedSubtractionFromPowerUp
-    {
-        get { return _speedSubtractionFromPowerUp; }
-        set { _speedSubtractionFromPowerUp = value; }
-    }
+  
 
     [SerializeReference]
+    [Range(0f, 100f)]
     float _probabilityObstacle = 20f;
 
     public const float MIN_PROBABILITY_OBSTACLE = 0f;
