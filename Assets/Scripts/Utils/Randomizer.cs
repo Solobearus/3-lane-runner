@@ -4,42 +4,31 @@ using UnityEngine;
 
 static public class Randomizer
 {
-    static int[] probabilities = { 40, 21, 2, 2 };
-    static public int[] lineRandomizer()
+
+    static public GameObject[] lineRandomizer(List<KeyValuePair<GameObject, float>> probabilities)
     {
-        int[] randomizedLine = new int[3];
-        int obstacleCount = 0;
+        GameObject[] randomizedLine = new GameObject[3];
 
-        do
+        for (int i = 0; i < randomizedLine.Length; i++)
         {
-            obstacleCount = 0;
-            for (int i = 0; i < 3; i++)
-            {
-                int randomItem = Random.Range(1, 101);
-                int item = 0;
-
-                if (randomItem < probabilities[0])
-                {
-                    item = 1;
-                    obstacleCount++;
-                }
-                else if (randomItem < probabilities[0] + probabilities[1])
-                {
-                    item = 2;
-                }
-                else if (randomItem < probabilities[0] + probabilities[1] + probabilities[2])
-                {
-                    item = 3;
-                }
-                else
-                {
-                    item = 0;
-                }
-
-                randomizedLine[i] = item;
-            }
-        } while (obstacleCount == 3);
-
+            randomizedLine[i] = generateItem(probabilities);
+        }
         return randomizedLine;
+    }
+
+    static GameObject generateItem(List<KeyValuePair<GameObject, float>> probabilities)
+    {
+        float randomItem = Random.Range(0, 100);
+        float currentProbability = 0;
+
+        foreach (KeyValuePair<GameObject, float> entry in probabilities)
+        {
+            currentProbability += entry.Value;
+            
+            if (currentProbability > randomItem)
+                return entry.Key;
+        }
+
+        return null;
     }
 }

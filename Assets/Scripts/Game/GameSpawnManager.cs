@@ -28,13 +28,19 @@ public class GameSpawnManager : MonoBehaviour
     GameConfigManager gameConfigManager;
     CameraManager cameraManager;
 
+    List<KeyValuePair<GameObject, float>> probabilities;
+
     void Start()
     {
         bookmark = BOOKMARK_START;
         gameStateManager = GetComponent<GameStateManager>();
         gameConfigManager = GetComponent<GameConfigManager>();
         cameraManager = GameObject.Find("MainCamera").GetComponent<CameraManager>();
+
+
+        
     }
+
     void Update()
     {
         if (gameStateManager.playing)
@@ -75,12 +81,19 @@ public class GameSpawnManager : MonoBehaviour
 
     void SpawnNextBulk()
     {
+        probabilities = new List<KeyValuePair<GameObject, float>>();
+
+        probabilities.Add(new KeyValuePair<GameObject, float>(obstacle, gameConfigManager.probabilityObstacle));
+        probabilities.Add(new KeyValuePair<GameObject, float>(coin, gameConfigManager.probabilityCoin));
+        probabilities.Add(new KeyValuePair<GameObject, float>(biggerCoin, gameConfigManager.probabilityBigCoin));
+        probabilities.Add(new KeyValuePair<GameObject, float>(lowerSpeedPowerUp, gameConfigManager.probabilitySlowPowerUp));
+        
         int i;
         for (i = bookmark; i < bookmark + gameConfigManager.itemsPerSpawn; i++)
         {
-            List<GameObject> line = lineSpawnRandomizer();
+            GameObject[] line = lineSpawnRandomizer();
 
-            for (int j = 0; j < line.Count; j++)
+            for (int j = 0; j < line.Length; j++)
             {
                 if (line[j] != null)
                 {
@@ -110,18 +123,26 @@ public class GameSpawnManager : MonoBehaviour
         }
     }
 
-    List<GameObject> lineSpawnRandomizer()
+    GameObject[] lineSpawnRandomizer()
     {
-        List<GameObject> itemsLine = new List<GameObject>();
-        GameObject[] itemsAvaliable = { null, obstacle, coin, biggerCoin, lowerSpeedPowerUp, };
+        GameObject[] itemsLine;
+        GameObject[] itemsAvaliable = { null, obstacle, coin, biggerCoin, lowerSpeedPowerUp };
 
-        int[] randomLine = Randomizer.lineRandomizer();
+        int obstacleCount = 0;
 
-        for (int i = 0; i < randomLine.Length; i++)
+        do
         {
-            Debug.Log(randomLine[i]);
-            itemsLine.Add(itemsAvaliable[randomLine[i]]);
-        }
+            obstacleCount = 0;
+            itemsLine = Randomizer.lineRandomizer(probabilities);
+
+            for (int i = 0; i < itemsLine.Length; i++)
+            {
+                if (itemsLine[i] == obstacle)
+                    obstacleCount++;
+            }
+
+        } while (obstacleCount == 3);
+
 
         return itemsLine;
     }
@@ -129,15 +150,15 @@ public class GameSpawnManager : MonoBehaviour
     float heightOfSpawnCalculator(GameObject item)
     {
 
-        float result = HEIGHT_OF_SPAWN;
+        float result = GameConsts.HEIGHT_OF_SPAWN;
 
         if (item == coin)
         {
-            result = HEIGHT_OF_SPAWN * 1.1f;
+            result = GameConsts.HEIGHT_OF_SPAWN * 1.1f;
         }
         if (item == biggerCoin)
         {
-            result = HEIGHT_OF_SPAWN * 1.4f;
+            result = GameConsts.HEIGHT_OF_SPAWN * 1.4f;
         }
         return result;
     }

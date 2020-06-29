@@ -3,6 +3,7 @@ ScriptsOnlyBuild:
     Assembly-CSharp.dll:
     - CameraManager
     - Collectable
+    - EndScreen
     - GameConfigManager
     - GameSpawnManager
     - GameStateManager
@@ -123,11 +124,13 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12964}
     - Class: 114
-      Script: {instanceID: 13754}
+      Script: {instanceID: 13684}
     - Class: 114
-      Script: {instanceID: 13756}
+      Script: {instanceID: 13686}
     - Class: 114
-      Script: {instanceID: 13758}
+      Script: {instanceID: 13688}
+    - Class: 114
+      Script: {instanceID: 14910}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -629,7 +632,13 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
+  - hash:
+      serializedVersion: 2
+      Hash: 827364d4b882364ddee473bc35dc6a59
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: EndScreen
   platform: 13
   scenePathNames:
   - Assets/Resources/Scenes/SampleScene.unity
-  playerPath: C:/Users/ivans/Desktop/TheGame.apk
+  playerPath: C:/Projects/Unity/CrazyLabs Prototype/TheGame.apk

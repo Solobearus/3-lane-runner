@@ -20,6 +20,12 @@ public class UIManager : MonoBehaviour
     GameObject optionsMenuScreen;
     [SerializeReference]
     Text scoreText;
+    [SerializeReference]
+    Slider cameraDistanseZSlider;
+    [SerializeReference]
+    Slider cameraDistanseYSlider;
+    [SerializeReference]
+    Slider cameraRotationXSlider;
 
     GameObject[] screens;
     void Start()
@@ -37,7 +43,7 @@ public class UIManager : MonoBehaviour
 
         cameraManager = GameObject.Find("MainCamera").GetComponent<CameraManager>();
 
-        SwitchScreen(3);
+        SwitchScreen(0);
     }
 
     void Update()
@@ -78,21 +84,13 @@ public class UIManager : MonoBehaviour
         SwitchScreen(1);
     }
 
-
-
-
-
-    //OPTIONS MENU MANAGER
-
-    public void InitOptions()
-    {
-    }
-
     public void changeValuesToPreset(int presetId)
     {
-
-        // gameConfigManager.cameraDistanceZ = z;
-        // gameConfigManager.cameraDistanceY = y;
-        // gameConfigManager.cameraRotationX = x;
+        gameConfigManager.cameraDistanceZ = GameConsts.CAMERA_PRESETS[presetId, 0];
+        gameConfigManager.cameraDistanceY = GameConsts.CAMERA_PRESETS[presetId, 1];
+        gameConfigManager.cameraRotationX = GameConsts.CAMERA_PRESETS[presetId, 2];
+        cameraDistanseZSlider.value = GameConsts.CAMERA_PRESETS[presetId, 0];
+        cameraDistanseYSlider.value = GameConsts.CAMERA_PRESETS[presetId, 1];
+        cameraRotationXSlider.value = GameConsts.CAMERA_PRESETS[presetId, 2];
     }
 }
