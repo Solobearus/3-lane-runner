@@ -28,7 +28,12 @@ public class UIManager : MonoBehaviour
         gameStateManager = GetComponent<GameStateManager>();
         gameConfigManager = GetComponent<GameConfigManager>();
 
-        screens = new GameObject[] { startScreen, playingScreen, endScreen, optionsMenuScreen };
+        screens = new GameObject[] {
+            startScreen,
+            playingScreen,
+            endScreen,
+            optionsMenuScreen
+        };
 
         cameraManager = GameObject.Find("MainCamera").GetComponent<CameraManager>();
 
@@ -70,7 +75,7 @@ public class UIManager : MonoBehaviour
     public void StartGame()
     {
         gameSpawnManager.Restart();
-        SwitchScreen(0);
+        SwitchScreen(1);
     }
 
 
@@ -82,7 +87,7 @@ public class UIManager : MonoBehaviour
     public void InitOptions()
     {
     }
- 
+
     public void changeValuesToPreset(int presetId)
     {
 

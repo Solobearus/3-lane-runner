@@ -43,6 +43,7 @@
      <Compile Include="Assets\Scripts\Game\GameStateManager.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerCollisionManager.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
+     <Compile Include="Assets\Scripts\UI\EndScreen.cs" />
      <Compile Include="Assets\Scripts\UI\SliderHelper.cs" />
      <Compile Include="Assets\Scripts\UI\UIManager.cs" />
      <Compile Include="Assets\Scripts\Utils\Randomizer.cs" />
